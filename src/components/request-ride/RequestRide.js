@@ -13,7 +13,7 @@ const RequestRide = ({ toggleModal }) => {
   const priceRef = useRef(null);
   const desRef = useRef(null);
   const dateRef = useRef(null);
-  const { user, selectedFrom, selectedTo, setRideRequest } = useContext(Context);
+  const {  selectedFrom, selectedTo, setRideRequest } = useContext(Context);
 
 
   const getInputs = () => {
@@ -48,8 +48,9 @@ const RequestRide = ({ toggleModal }) => {
       //   isValid({ nbr, price, des, date })
       // ) {
         console.log('df',selectedFrom)
+        const id= JSON.parse(localStorage.getItem('idd'))
 
-        if (!user && selectedFrom && selectedTo) {
+        if (id && selectedFrom && selectedTo) {
           toggleModal(false);
           uiService.showLoading();
           const ride = {
@@ -63,12 +64,23 @@ const RequestRide = ({ toggleModal }) => {
           console.log('dfg', ride)
 
 
-          const response = await axios.post('publication/conducteur/'+user.id,{ride});
+          const response = await axios.post('publication/conducteur/'+id
+          ,{
+            lieuDepart: selectedFrom.label,
+            lieuArrive: selectedTo.label,
+            nbrePlace: nbr,
+            prix: price,
+            dateDepart: date,
+            description: des
+          }
+          );
           console.log(response);
+          uiService.hideLoading()
         }
       // }
     } catch (error) {
       console.error(error);
+      uiService.hideLoading()
     }
   }
 
@@ -78,7 +90,7 @@ const RequestRide = ({ toggleModal }) => {
     <div className="request-ride">
       <div className="request-ride__content">
         <div className="request-ride__container">
-          <div className="request-ride__title" onClick={() => toggleModal(false)}>Requesting a Ride</div>
+          <div className="request-ride__title" onClick={() => toggleModal(false)}>Adding a Trip</div>
           <div className="request-ride__close">
             <img
               alt="close"

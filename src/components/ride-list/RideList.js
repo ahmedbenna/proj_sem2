@@ -4,11 +4,12 @@ import { useEffect, useState, useContext, useRef } from "react";
 import * as uiService from "../../services/ui";
 
 import Context from "../../context";
+import axios from "axios";
 
 const RideList = () => {
   const [rideRequests, setRideRequests] = useState();
 
-  const { user, setCurrentRide, setSelectedFrom, setSelectedTo } =
+  const { setCurrentRide, setSelectedFrom, setSelectedTo } =
     useContext(Context);
 
 
@@ -35,23 +36,23 @@ const RideList = () => {
   };
 
   const acceptRide = async (request) => {
-    request.driver = user;
-    request.status = "accepted";
-    uiService.showLoading();
+    // request.driver = user;
+    // request.status = "accepted";
+    // uiService.showLoading();
+    // const id = JSON.parse(localStorage.getItem('idd'))
     // try {
-    //   await firebaseService.insert({
-    //     key: "rides",
-    //     id: request.rideUuid,
-    //     payload: request,
-    //   });
+    //   const response = await axios.post('publication/publication/conducteur/' + id)
+    //   console.log(response);
+    //   uiService.hideLoading()
+
     // } catch (error) {
     //   uiService.hideLoading();
     // }
-    uiService.hideLoading();
-    localStorage.setItem("currentRide", JSON.stringify(request));
-    setCurrentRide(request);
-    setSelectedFrom(request.pickup);
-    setSelectedTo(request.destination);
+    // uiService.hideLoading();
+    // // localStorage.setItem("currentRide", JSON.stringify(request));
+    // // setCurrentRide(request);
+    // setSelectedFrom(request.pickup);
+    // setSelectedTo(request.destination);
   };
 
   const renderRideList = () => {

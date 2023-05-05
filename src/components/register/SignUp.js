@@ -30,7 +30,7 @@ const SignUp = ({ toggleModal }) => {
     console.log('ddd')
 
     try {
-      const { prenom, nom, email, password, confirmPassword, role , telephone} = getInputs();
+      const { prenom, nom, email, password, confirmPassword, role, telephone } = getInputs();
       if (
         isSignupValid({
           // about,
@@ -49,7 +49,13 @@ const SignUp = ({ toggleModal }) => {
         uiService.showLoading();
         if (role == 'passenger') {
           try {
-            const response = await axios.post('/passager', createdAccount);
+            const response = await axios.post('/passager', {
+              prenom: prenom,
+              nom: nom,
+              email: email,
+              telephone: telephone,
+              password: password
+            });
             console.log(response.data);
           } catch (error) {
             console.error(error)
@@ -57,7 +63,13 @@ const SignUp = ({ toggleModal }) => {
 
         } else if (role == 'driver') {
           try {
-            const response = await axios.post('/conducteur/add', createdAccount);
+            const response = await axios.post('/conducteur/add', {
+              prenom: prenom,
+              nom: nom,
+              email: email,
+              telephone: telephone,
+              password: password
+            });
             console.log(response);
           } catch (error) {
             console.error(error)

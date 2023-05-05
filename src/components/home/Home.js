@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useContext, useCallback } from "react";
 import L from "leaflet";
 
 import AddressPicker from "../address-picker/AddressPicker";
-import Header from "../common/Header";
+import HeaderPassenger from "../common/HeaderPassenger";
 import RideDetail from "../ride-detail/RideDetail";
 import RideList from "../ride-list/RideList";
 
 import Context from "../../context";
+import HeaderDriver from "../common/HeaderDriver";
+import HeaderGuest from "../common/HeaderGuest";
 
 require("leaflet-routing-machine");
 
@@ -15,7 +17,7 @@ const Home = () => {
   const routeControl = useRef();
 
   const { selectedFrom, selectedTo, user, currentRide } = useContext(Context);
-// console.log('aaaa',passager)
+  // console.log('aaaa',passager)
   const style = {
     marginTop: "50px",
     width: "100%",
@@ -86,10 +88,11 @@ const Home = () => {
   };
 
   const renderSidebar = () => {
-    const isPassenger = user && user.role === "passenger";
-    // if (isPassenger && !currentRide) {
+    const isPassenger = JSON.parse(localStorage.getItem('idp'));
+    const isDriver = JSON.parse(localStorage.getItem('idd'));
+    if (isDriver) {
       return <AddressPicker />;
-    // }
+    }
     // if (isPassenger && currentRide) {
     //   return (
     //     <RideDetail
@@ -100,7 +103,7 @@ const Home = () => {
     //   );
     // }
     // if (!isPassenger && !currentRide) {
-      // return <RideList />;
+    //   return <RideList />;
     // }
     // if (!isPassenger && currentRide) {
     //   return (
@@ -111,12 +114,31 @@ const Home = () => {
     //     />
     //   );
     // }
-    // return <></>;
+    return <></>;
   };
+
+  // const renderHeader = () => {
+  //   const isPassenger = JSON.parse(localStorage.getItem('idp'));
+  //   const isDriver = JSON.parse(localStorage.getItem('idd'));
+  //   if (isPassenger) {
+  //     return <HeaderPassenger />;
+  //   }
+  //   else
+  //   if (isDriver) {
+  //     return (
+  //       <HeaderDriver />
+  //     );
+  //   }else{
+  //     <HeaderGuest/>
+  //   }
+  //   return <></>;
+  // };
+
 
   return (
     <>
-      <Header />
+      {/* {(isPassenger)?( <HeaderPassenger />):(isDriver)?(<HeaderDriver/>):('')} */}
+      {/* {renderHeader()} */}
       <div id="map" style={style} />
       {renderSidebar()}
     </>

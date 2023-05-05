@@ -1,71 +1,58 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useRef, useState } from 'react'
 
 export default function Landing() {
+
+    const fromRef = useRef(null);
+    const destinationRef = useRef(null);
+
+    const [ result, setResult] = useState(null)
+
+    const getInputs = () => {
+       
+        const from = fromRef.current.value;
+        const destination = destinationRef.current.value;
+        return { from, destination};
+      };
+
+
+    const search = async () => {
+        const { from, destination } = getInputs();
+        try{
+            const response = await axios.get('publication/')
+            console.log(response)
+            setResult(response.data)
+        }
+        
+        catch (error){
+            console.log(error)
+        }
+    }
     return (
-        <div>
-            <section className="welcome-area">
-                <div className="welcome-slides owl-carousel">
-
-                    <div className="single-welcome-slide bg-img bg-overlay" styles={{ backgroundImage:`url(img/bg-img/16.jpg)` }} 
-                        data-img-url="img/bg-img/16.jpg">
-
-                        <div className="welcome-content h-100">
-                            <div className="container h-100">
-                                <div className="row h-100 align-items-center">
-
-                                    <div className="col-12">
-                                        <div className="welcome-text text-center">
-                                            <h6 data-animation="fadeInLeft" data-delay="200ms">Hotel &amp; Resort</h6>
-                                            <h2 data-animation="fadeInLeft" data-delay="500ms">Welcome To Roberto</h2>
-                                            <a href="#" className="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Discover
-                                                Now</a>
-                                        </div>
-                                    </div>
-                                </div>
+        <div className="s013" style={{backgroundColor:'#232223'}}>
+            <form>
+                <fieldset>
+                    <legend>QUICK FIND YOUR TRIP</legend>
+                </fieldset>
+                <div className="inner-form">
+                    <div className="left">
+                        <div className="input-wrap first">
+                            <div className="input-field first">
+                                <label>From</label>
+                                <input type="text" ref={fromRef} placeholder="ex: Tunis, Souse, Djerba" />
+                            </div>
+                        </div>
+                        <div className="input-wrap second">
+                            <div className="input-field second">
+                                <label>Destination</label>
+                                <input type="text" ref={destinationRef} />
                             </div>
                         </div>
                     </div>
-
-                    <div className="single-welcome-slide bg-img bg-overlay"  styles={{ backgroundImage:`url(img/bg-img/17.jpg)` }} data-img-url="img/bg-img/17.jpg">
-
-                        <div className="welcome-content h-100">
-                            <div className="container h-100">
-                                <div className="row h-100 align-items-center">
-
-                                    <div className="col-12">
-                                        <div className="welcome-text text-center">
-                                            <h6 data-animation="fadeInUp" data-delay="200ms">Hotel &amp; Resort</h6>
-                                            <h2 data-animation="fadeInUp" data-delay="500ms">Welcome To Roberto</h2>
-                                            <a href="#" className="btn roberto-btn btn-2" data-animation="fadeInUp" data-delay="800ms">Discover
-                                                Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="single-welcome-slide bg-img bg-overlay" styles={{ backgroundImage:`url(img/bg-img/18.jpg)` }} 
-                        data-img-url="img/bg-img/18.jpg">
-
-                        <div className="welcome-content h-100">
-                            <div className="container h-100">
-                                <div className="row h-100 align-items-center">
-
-                                    <div className="col-12">
-                                        <div className="welcome-text text-center">
-                                            <h6 data-animation="fadeInDown" data-delay="200ms">Hotel &amp; Resort</h6>
-                                            <h2 data-animation="fadeInDown" data-delay="500ms">Welcome To Roberto</h2>
-                                            <a href="#" className="btn roberto-btn btn-2" data-animation="fadeInDown" data-delay="800ms">Discover
-                                                Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button onClick={search}  className="btn-search" type="button">SEARCH</button>
                 </div>
-            </section>
+            </form>
+            
         </div>
     )
 }
