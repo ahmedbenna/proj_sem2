@@ -1,6 +1,27 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react'
 
+import './assets/css/fontawesome.css';
+import './assets/css/templatemo-woox-travel.css';
+import './assets/css/owl.css';
+import './assets/css/animate.css';
+
+// require( "./assets/js/isotope.min.js")
+// require("./assets/js/tabs.js")
+// require( "./assets/js/owl-carousel.js")
+// require( "./assets/js/wow.js")
+// require( "./assets/js/popup.js")
+// require( "./assets/js/custom.js")
+
+
+// require( "./vendor/jquery/jquery.min.js")
+// require( "./vendor/bootstrap/js/bootstrap.min.js")
+
+
+{/* <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script> */}
+
+
 export default function Landing() {
 
     const fromRef = useRef(null);

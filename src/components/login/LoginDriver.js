@@ -1,113 +1,149 @@
-import React, { useEffect, useRef, useContext, useState } from "react";
-import validator from "validator";
-import { useHistory } from "react-router-dom";
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
-import withModal from "../common/Modal";
-import SignUp from "../register/SignUp";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link, Navigate, Redirect } from 'react-router-dom'
+import { Formik } from 'formik';
+import * as yup from "yup";
+import axios from 'axios';
 
-import Context from "../../context";
 
-// import * as cometChatService from "../../services/cometchat";
-// import * as firebaseService from "../../services/firebase";
-import * as uiService from "../../services/ui";
-import axios from "axios";
 
-const Login = ({ toggleModal }) => {
-  // const { passager, setPassager } = useContext(Context);
+const theme = createTheme();
 
-  const [passager, setPassager] = useState()
+export default function LoginDriver() {
 
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const [formData, setformData] = React.useState()
 
-  const history = useHistory();
-
-  useEffect(() => {
-  //   // const authedUser = null
-    const authedUser = JSON.parse(localStorage.getItem("id"));
-    // console.log('auth',authedUser)
-    if (authedUser) 
-      history.push("/");
-  //     console.log('444')
-
-  //   } else {
-  //     setPassager(null);
-
-  //   }
-  }, []);
-
-  // console.log('444')
-  const login = async () => {
+  async function auth() {
     try {
-      uiService.showLoading();
-      const { email, password } = getInputs();
-      setPassager({
-        email: email,
-        password: password
-      })
-      if (isUserCredentialsValid(email, password)) {
-        const response = await axios.post('conducteur/auth', {
-          email: email,
-          password: password
-        });
-        console.log('dfgdfghdfg',response);
-        saveAuthedInfo(response.data);
-        uiService.hideLoading();
-        history.push("/");
-      } else {
-        uiService.hideLoading();
-        uiService.alert(`Your passager's name or password is not correct`);
-      }
+      const response = await axios.post('conducteur/auth', formData);
+      console.log(response);
+      localStorage.setItem('idd', JSON.stringify({ "id": response.data.id }))
+      window.location.replace("/")
     } catch (error) {
-      uiService.hideLoading();
+      if (error.response.status == 400) {
+        auth()
+      }
+      console.error(error);
     }
-  };
+  }
 
-  const getInputs = () => {
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    return { email, password };
-  };
+  const validationSchema = yup.object({
 
-  const isUserCredentialsValid = (email, password) => {
-    return validator.isEmail(email) && password;
-  };
+    email: yup.string()
+      .required('Obligatoire')
+      .email('Invalid email'),
+    password: yup.string()
+      .required('Obligatoire')
 
-  const saveAuthedInfo = (passager) => {
-    // setPassager(passager);
-    localStorage.setItem("idd", JSON.stringify(passager.id));
-  };
+  })
 
   return (
-    <div className="login__container">
-      <div className="login__welcome">
-        {/* <p>
-          Build{" "}
-          <span style={{ color: "#000000", fontWeight: "bold" }}>
-            Uber Clone
-          </span>{" "}
-          with React
-        </p> */}
-      </div>
-      <div className="login__form-container">
-        <div className="login__form">
-          <input
-            type="text"
-            placeholder="Email or phone number"
-            ref={emailRef}
-          />
-          <input type="password" placeholder="Password" ref={passwordRef} />
-          <button className="login__submit-btn" onClick={login}>
-            Login
-          </button>
-          <span className="login__forgot-password">Forgot password?</span>
-          <span className="login__signup" onClick={() => toggleModal(true)}>
-            Create New Account
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-};
+    <ThemeProvider  theme={theme}>
+      <Container style={{backgroundColor:'white'}}  component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Login DRIVER
+          </Typography>
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            onSubmit={async (values) => {
+              setformData({
+                email: values.email,
+                password: values.password,
+              });
+              axios.post('passager/auth', {
+                email: values.email,
+                password: values.password,
+              })
+                .then(response => {
+                  console.log(response)
+                  localStorage.setItem('idp', JSON.stringify(response.data.id ))
+                  window.location.replace("/")
+                })
+                .catch(error => console.error(error))
+            }}
+          >
+            {props => (
+              <form onSubmit={props.handleSubmit} >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={props.values.email}
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  error={props.touched.email && Boolean(props.errors.email)}
+                  helperText={props.touched.email && props.errors.email}
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  value={props.values.password}
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  error={props.touched.password && Boolean(props.errors.password)}
+                  helperText={props.touched.password && props.errors.password}
+                  autoComplete="current-password"
+                />
 
-export default withModal(SignUp)(Login);
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign In
+                </Button>
+                <Grid container>
+
+                  <Grid item>
+                    <Link to="/signUpDriver">
+                      {"Don't have an account?    Sign Up"}
+                    </Link>
+                  </Grid>
+                </Grid>
+              </form>
+            )}
+          </Formik>
+        </Box>
+
+      </Container>
+    </ThemeProvider >
+  );
+}

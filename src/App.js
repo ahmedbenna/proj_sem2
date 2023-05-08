@@ -18,11 +18,13 @@ import * as uiService from "./services/ui";
 import Context from "./context";
 
 import "./index.css";
-import Landing from "./components/home/Landing";
+import Landing from "./components/landing/Landing";
 import LoginDriver from "./components/login/LoginDriver";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Search from "./components/home/Search";
+import SignUpDriver from "./components/register/SignUpDriver";
+import SignUpPassenger from "./components/register/SignUpPassenger";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -165,7 +167,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/landing" component={Landing} />
+          <Route exact path="/" component={Landing} />
           <Route exact path="/search" component={Search} />
 
           <PrivateRoute exact path="/Home" component={Home} />
@@ -177,8 +179,14 @@ function App() {
             {/* {(JSON.parse(localStorage.getItem('id')))?(<Home />):(<Login/>) } */}
             <LoginPassenger />
           </Route>
-          <Route exact path="/LoginDriver">
+          <Route exact path="/loginDriver">
             <LoginDriver />
+          </Route>
+          <Route exact path="/signUpDriver">
+            <SignUpDriver />
+          </Route>
+          <Route exact path="/signUpPassenger">
+            <SignUpPassenger />
           </Route>
           <Route exact path="*">
             <Redirect to="/" />

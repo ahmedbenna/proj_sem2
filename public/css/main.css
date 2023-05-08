@@ -869,7 +869,7 @@ legend {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
-  background: url("../images/7506749.jpg");
+  /* background: url("../images/7506749.jpg"); */
   background-size: cover;
   background-position: center center;
   padding: 15px;
@@ -1094,4 +1094,4 @@ legend {
   }
 }
 
-/*# sourceMappingURL=Searchs_013.css.map */
+/* # sourceMappingURL=Searchs_013.css.map */

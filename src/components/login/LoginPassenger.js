@@ -21,15 +21,17 @@ import axios from 'axios';
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function LoginPassenger() {
 
   const [formData, setformData] = React.useState()
+  const [err, setErr] = React.useState(false)
+
 
   async function auth() {
     try {
       const response = await axios.post('passager/auth', formData);
       console.log(response);
-      localStorage.setItem('idc', JSON.stringify({ "id": response.data.id }))
+      localStorage.setItem('idp', JSON.stringify({ "id": response.data.id }))
       window.location.replace("/")
     } catch (error) {
       if (error.response.status == 400) {
@@ -50,8 +52,8 @@ export default function SignIn() {
   })
 
   return (
-    <ThemeProvider  theme={theme}>
-      <Container style={{backgroundColor:'white'}}  component="main" maxWidth="xs">
+    <ThemeProvider theme={theme}>
+      <Container style={{ backgroundColor: 'white' }} component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -65,7 +67,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Login PASSENGER
           </Typography>
           <Formik
             initialValues={{
@@ -73,6 +75,8 @@ export default function SignIn() {
               password: "",
             }}
             onSubmit={async (values) => {
+              setErr(false)
+
               setformData({
                 email: values.email,
                 password: values.password,
@@ -83,10 +87,13 @@ export default function SignIn() {
               })
                 .then(response => {
                   console.log(response)
-                  localStorage.setItem('idp', JSON.stringify(response.data.id ))
+                  localStorage.setItem('idp', JSON.stringify(response.data.id))
                   window.location.replace("/")
                 })
-                .catch(error => console.error(error))
+                .catch(error => {
+                  console.error(error)
+                  setErr(true)
+                })
             }}
           >
             {props => (
@@ -121,6 +128,8 @@ export default function SignIn() {
                   helperText={props.touched.password && props.errors.password}
                   autoComplete="current-password"
                 />
+                {(err) ? (<Typography color={'red'}> Email or Password is not valid</Typography>
+                ) : ('')}
 
                 <Button
                   type="submit"
@@ -133,7 +142,7 @@ export default function SignIn() {
                 <Grid container>
 
                   <Grid item>
-                    <Link to="/signupClient">
+                    <Link to="/signUpPassenger">
                       {"Don't have an account?    Sign Up"}
                     </Link>
                   </Grid>

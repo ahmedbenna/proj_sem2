@@ -4,18 +4,26 @@ import { useHistory } from "react-router-dom";
 import Context from "../../context";
 import axios from "axios";
 import Loading from "./Loading";
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Button, CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 const HeaderPassenger = () => {
   const [passager, setPassager] = useState();
   const [isLoading, setIsloading] = useState(true);
 
   const id = JSON.parse(localStorage.getItem('idp'))
+
+
+
   const getUser = async () => {
     try {
-      const response = await axios.get('/passager/' + id);
+      const response = await axios.get('/passager/' + id.id);
       console.log(response);
-      setIsloading(false)
       setPassager(response.data)
+      setIsloading(false)
+
       console.log('ppppppp', response.data)
 
     } catch (error) {
@@ -23,17 +31,32 @@ const HeaderPassenger = () => {
     }
   }
   useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await axios.get('/passager/' + id);
+        console.log(response);
+        setPassager(response.data)
+        setIsloading(false)
+
+        console.log('ppppppp', response.data)
+  
+      } catch (error) {
+        console.error(error);
+      }
+    }
     getUser()
   }, [isLoading]);
+
+
   const history = useHistory();
 
   const logout = () => {
-    const isLogout = window.confirm("Do you want to log out ?");
-    if (isLogout) {
+    // const isLogout = window.confirm("Do you want to log out ?");
+    // if (isLogout) {
 
       removeAuthedInfo();
-      history.push("/login");
-    }
+      window.location = '/'
+      // }
   };
 
   // console.error('aaa')
@@ -42,7 +65,10 @@ const HeaderPassenger = () => {
     localStorage.removeItem("idp");
   };
   console.log('pass', passager)
-  // if (!isLoading)
+  if (isLoading) {
+
+    return <div className="App"><CircularProgress /></div>;
+}
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -65,6 +91,13 @@ const HeaderPassenger = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">Contact</a>
+            </li>
+            <br/>
+            <li className="nav-item">
+              <a className="nav-link" href="#"><AccountCircleIcon/>  {passager.prenom} {passager.nom} </a>
+            </li>
+            <li className="nav-item">
+              <Button color="secondary"  className="nav-link" onClick={logout}><LogoutIcon/> LOGOUT </Button>
             </li>
           </ul>
         </div>
