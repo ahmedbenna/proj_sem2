@@ -84,33 +84,35 @@ export default function SearchCard() {
             .getPlan();
     };
     return (
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="item">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-5">
-                            <div class="image">
+        <div className="row">
+            <div className="col-lg-12">
+                <div className="item">
+                    <div className="row">
+                        <div className="col-lg-4 col-sm-5">
+                            <div className="image">
                                 <div id="map" style={style} />
                             </div>
-                            <div class="col-lg-8 col-sm-7">
-                                <div class="right-content">
-                                    <ul class="info">
-                                        <li><i class="fa fa-location"></i> From</li>
+                            <div className="col-lg-8 col-sm-7">
+                                <div className="right-content">
+                                    <ul className="info">
+                                        <li><i className="fa fa-location"></i> From</li>
                                         <li> Destination</li>
                                         <li> Price</li>
                                     </ul>
                                     {/* <span>Europe</span> */}
-                                    {/* <div class="main-button">
+                                    {/* <div className="main-button">
                               <a href="about.html">Explore More</a>
                             </div> */}
                                     {/* <p>Woox Travel is a professional Bootstrap 5 theme HTML CSS layout for your website. You can use this layout for your commercial work.</p> */}
-                                    <ul class="info">
-                                        <li><i class="fa fa-user"></i> name</li>
+                                    <ul className="info">
+                                        <li><i className="fa fa-user"></i> name</li>
                                         <li> Email</li>
                                         <li> Phone</li>
+                                        <li> Description</li>
+
                                     </ul>
-                                    <div class="text-button">
-                                        <a href="about.html">Reserve <i class="fa fa-arrow-right"></i></a>
+                                    <div className="text-button">
+                                        <a href="about.html">Reserve <i className="fa fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

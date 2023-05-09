@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react'
 
-import './assets/css/fontawesome.css';
-import './assets/css/templatemo-woox-travel.css';
-import './assets/css/owl.css';
-import './assets/css/animate.css';
+import "./css/main.css"
+import { Link } from 'react-router-dom';
+// import './assets/css/templatemo-woox-travel.css';
+// import './assets/css/owl.css';
+// import './assets/css/animate.css';
 
 // require( "./assets/js/isotope.min.js")
 // require("./assets/js/tabs.js")
@@ -27,30 +28,39 @@ export default function Landing() {
     const fromRef = useRef(null);
     const destinationRef = useRef(null);
 
-    const [ result, setResult] = useState(null)
+    const [result, setResult] = useState(null)
+    const [from, setFrom] = useState(null)
+    const [destination, setDestination] = useState(null)
+
+    // setFrom(fromRef.current.value)
+    // setDestination(destinationRef.current.value)
 
     const getInputs = () => {
-       
+
         const from = fromRef.current.value;
         const destination = destinationRef.current.value;
-        return { from, destination};
-      };
+        setFrom(from)
+        setDestination(destination)
+
+        return { from, destination };
+
+    };
 
 
     const search = async () => {
         const { from, destination } = getInputs();
-        try{
+        try {
             const response = await axios.get('publication/')
             console.log(response)
             setResult(response.data)
         }
-        
-        catch (error){
+
+        catch (error) {
             console.log(error)
         }
     }
     return (
-        <div className="s013" style={{backgroundColor:'#232223'}}>
+        <div className="s013" style={{ backgroundColor: '#232223' }}>
             <form>
                 <fieldset>
                     <legend>QUICK FIND YOUR TRIP</legend>
@@ -60,20 +70,22 @@ export default function Landing() {
                         <div className="input-wrap first">
                             <div className="input-field first">
                                 <label>From</label>
-                                <input type="text" ref={fromRef} placeholder="ex: Tunis, Souse, Djerba" />
+                                <input type="text" value={from} onChange={e => setFrom(e.currentTarget.value)} placeholder="ex: Tunis, Souse, Djerba" />
                             </div>
                         </div>
                         <div className="input-wrap second">
                             <div className="input-field second">
                                 <label>Destination</label>
-                                <input type="text" ref={destinationRef} />
+                                <input type="text" value={destination} onChange={e => setDestination(e.currentTarget.value)}  />
                             </div>
                         </div>
                     </div>
-                    <button onClick={search}  className="btn-search" type="button">SEARCH</button>
+                    <Link to='/search' state={{ from:' from, destination: destination '}}>
+                        <button className="btn-search" type="button">SEARCH</button>
+                    </Link>
                 </div>
             </form>
-            
+
         </div>
     )
 }

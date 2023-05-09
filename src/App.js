@@ -25,6 +25,7 @@ import Footer from "./components/common/Footer";
 import Search from "./components/home/Search";
 import SignUpDriver from "./components/register/SignUpDriver";
 import SignUpPassenger from "./components/register/SignUpPassenger";
+import PassengerProfile from "./components/passenger/PassengerProfile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -174,13 +175,14 @@ function App() {
 
           
 
-          {/* <PrivateRoute exact path="/chat" component={Chat} /> */}
           <Route exact path="/loginPaasenger">
-            {/* {(JSON.parse(localStorage.getItem('id')))?(<Home />):(<Login/>) } */}
             <LoginPassenger />
           </Route>
           <Route exact path="/loginDriver">
             <LoginDriver />
+          </Route>
+          <Route  path="/passengerProfile ">
+            <PassengerProfile />
           </Route>
           <Route exact path="/signUpDriver">
             <SignUpDriver />
@@ -188,9 +190,9 @@ function App() {
           <Route exact path="/signUpPassenger">
             <SignUpPassenger />
           </Route>
-          <Route exact path="*">
+          {/* <Route exact path="*">
             <Redirect to="/" />
-          </Route>
+          </Route> */}
         </Switch>
         <Footer/>
       </Router>
