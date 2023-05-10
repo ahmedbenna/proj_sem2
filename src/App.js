@@ -6,6 +6,11 @@ import {
   Redirect,
 } from "react-router-dom";
 
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+
 // import Chat from "./components/chat/Chat";
 import Home from "./components/home/Home";
 import Loading from "./components/common/Loading";
@@ -26,6 +31,7 @@ import Search from "./components/home/Search";
 import SignUpDriver from "./components/register/SignUpDriver";
 import SignUpPassenger from "./components/register/SignUpPassenger";
 import PassengerProfile from "./components/passenger/PassengerProfile";
+import EditPassengerProfile from "./components/passenger/EditPassengerProfile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -181,7 +187,7 @@ function App() {
           <Route exact path="/loginDriver">
             <LoginDriver />
           </Route>
-          <Route  path="/passengerProfile ">
+          <Route exact path="/passengerProfile ">
             <PassengerProfile />
           </Route>
           <Route exact path="/signUpDriver">
@@ -190,11 +196,17 @@ function App() {
           <Route exact path="/signUpPassenger">
             <SignUpPassenger />
           </Route>
+          <Route exact path="/editPassengerProfile">
+            <EditPassengerProfile />
+          </Route>
+          {/* <Route path='/passengerProfile' element={<PassengerProfile />} /> */}
+
           {/* <Route exact path="*">
             <Redirect to="/" />
           </Route> */}
         </Switch>
         <Footer/>
+        <PassengerProfile />
       </Router>
       <Loading />
     </Context.Provider>

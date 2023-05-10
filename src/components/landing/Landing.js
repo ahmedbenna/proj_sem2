@@ -29,8 +29,8 @@ export default function Landing() {
     const destinationRef = useRef(null);
 
     const [result, setResult] = useState(null)
-    const [from, setFrom] = useState(null)
-    const [destination, setDestination] = useState(null)
+    const [from, setFrom] = useState("")
+    const [destination, setDestination] = useState("")
 
     // setFrom(fromRef.current.value)
     // setDestination(destinationRef.current.value)

@@ -94,7 +94,7 @@ const HeaderPassenger = () => {
             </li>
             <br/>
             <li className="nav-item">
-              <a className="nav-link" href="#"><AccountCircleIcon/>  {passager.prenom} {passager.nom} </a>
+              <Link className="nav-link" to="/passengerProfile"><AccountCircleIcon/>  {passager.prenom} {passager.nom} </Link>
             </li>
             <li className="nav-item">
               <Button color="secondary"  className="nav-link" onClick={logout}><LogoutIcon/> LOGOUT </Button>

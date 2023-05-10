@@ -1,57 +1,149 @@
 import React from 'react'
 
-import "./passengerProfile.css"
+import "./assets/passengerProfile.css"
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+// import { useEffect, useState } from 'react'
+import { CircularProgress, Button } from '@mui/material';
+import axios from 'axios';
+// import ClientContractsList from './ClientContractsList';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import Avatar from './assets/avatar.png'
+import PassengerPublication from './PassengerPublication';
+
+
 
 export default function PassengerProfile() {
+    const idp = JSON.parse(localStorage.getItem('idp'))
+
+    const [loading, setLoading] = React.useState(true);
+    const [passenger, setPassenger] = React.useState(null);
+    React.useEffect(() => {
+        async function getClient() {
+            try {
+                const response = await axios.get('/passager/' + idp);
+                console.log(response);
+                setPassenger(response.data);
+                console.log("ccccc", passenger);
+                setLoading(false);
+            } catch (error) {
+                console.error("dfgfdfd",error);
+            }
+        }
+        getClient()
+    }, [loading])
+    console.log('pppppp',passenger)
+    if (loading) {
+
+        return <div ><CircularProgress /></div>
+    }
     return (
-        <div>
-            dfvgbhj
-            <div className="container rounded bg-white mt-5 mb-5">
-                <div className="row">
-                    <div className="col-md-3 border-right">
-                        <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img className="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" />
-                            <span className="font-weight-bold">Edogaru</span>
-                            <span className="text-black-50">edogaru@mail.com.my</span>
-                            <span> </span>
+
+        <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src={Avatar} alt="" />
+                            {/* <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file" />
+                            </div> */}
                         </div>
                     </div>
-                    <div className="col-md-5 border-right">
-                        <div className="p-3 py-5">
-                            <div className="d-flex justify-content-between align-items-center mb-3">
-                                <h4 className="text-right">Profile Settings</h4>
-                            </div>
-                            <div className="row mt-2">
-                                <div className="col-md-6"><label className="labels1">Name</label><input type="text" className="form-control" placeholder="first name" value="" /></div>
-                                <div className="col-md-6"><label className="labels1">Surname</label><input type="text" className="form-control" value="" placeholder="surname" /></div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-md-12"><label className="labels1">Mobile Number</label><input type="text" className="form-control" placeholder="enter phone number" value="" /></div>
-                                <div className="col-md-12"><label className="labels1">Address Line 1</label><input type="text" className="form-control" placeholder="enter address line 1" value="" /></div>
-                                <div className="col-md-12"><label className="labels1">Address Line 2</label><input type="text" className="form-control" placeholder="enter address line 2" value="" /></div>
-                                <div className="col-md-12"><label className="labels1">Postcode</label><input type="text" className="form-control" placeholder="enter address line 2" value="" /></div>
-                                <div className="col-md-12"><label className="labels1">State</label><input type="text" className="form-control" placeholder="enter address line 2" value="" /></div>
-                                <div className="col-md-12"><label className="labels1">Area</label><input type="text" className="form-control" placeholder="enter address line 2" value="" /></div>
-                                <div className="col-md-12"><label className="labels1">Email ID</label><input type="text" className="form-control" placeholder="enter email id" value="" /></div>
-                                <div className="col-md-12"><label className="labels1">Education</label><input type="text" className="form-control" placeholder="education" value="" /></div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-md-6"><label className="labels1">Country</label><input type="text" className="form-control" placeholder="country" value="" /></div>
-                                <div className="col-md-6"><label className="labels1">State/Region</label><input type="text" className="form-control" value="" placeholder="state" /></div>
-                            </div>
-                            <div className="mt-5 text-center"><button className="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                            <h5>
+                                {passenger.prenom} {passenger.nom}
+                            </h5>
+                            <Link to='/editPassengerProfile'>
+                                <Button >Edit Profile </Button>
+                            </Link>
+
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Contracts</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div className="col-md-4">
-                        <div className="p-3 py-5">
-                            <div className="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span className="border px-3 p-1 add-experience">
-                                <i className="fa fa-plus"></i>&nbsp;Experience</span>
-                            </div><br />
-                            <div className="col-md-12"><label className="labels1">Experience in Designing</label><input type="text" className="form-control" placeholder="experience" value="" /></div> <br />
-                            <div className="col-md-12"><label className="labels1">Additional Details</label><input type="text" className="form-control" placeholder="additional details" value="" /></div>
+                    {/* <div class="col-md-2">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+                    </div> */}
+                </div>
+                <div class="row">
+                    {/* <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>WORK LINK</p>
+                            <a href="">Website Link</a><br />
+                            <a href="">Bootsnipp Profile</a><br />
+                            <a href="">Bootply Profile</a>
+                            <p>SKILLS</p>
+                            <a href="">Web Designer</a><br />
+                            <a href="">Web Developer</a><br />
+                            <a href="">WordPress</a><br />
+                            <a href="">WooCommerce</a><br />
+                            <a href="">PHP, .Net</a><br />
+                        </div>
+                    </div> */}
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>First Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{passenger.prenom} </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{passenger.nom}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{passenger.email}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{passenger.telephone}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Birthday</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                    <p>{moment(passenger.dateDeNaissance).format("dddd, MMMM Do YYYY")}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <Link to='/search'>
+                                    <Button> search a provider</Button>
+                                </Link>
+                                <PassengerPublication />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-  )
+    )
 }
