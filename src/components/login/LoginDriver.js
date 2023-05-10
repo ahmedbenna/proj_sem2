@@ -79,13 +79,13 @@ export default function LoginDriver() {
                 email: values.email,
                 password: values.password,
               });
-              axios.post('passager/auth', {
+              axios.post('conducteur/auth', {
                 email: values.email,
                 password: values.password,
               })
                 .then(response => {
                   console.log(response)
-                  localStorage.setItem('idp', JSON.stringify(response.data.id))
+                  localStorage.setItem('idd', JSON.stringify(response.data.id))
                   window.location.replace("/")
                 })
                 .catch(error => {

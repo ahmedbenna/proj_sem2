@@ -57,7 +57,7 @@ export default function DriverProfile() {
                             <h5>
                                 {driver.prenom} {driver.nom}
                             </h5>
-                            <Link to='/editPassengerProfile'>
+                            <Link to='/editProfileDriver'>
                                 <Button >Edit Profile </Button>
                             </Link>
 
@@ -138,15 +138,15 @@ export default function DriverProfile() {
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <Link to='/search'>
-                                    <Button> search a provider</Button>
+                                <Link to='/addRide'>
+                                    <Button> Add Ride</Button>
                                 </Link>
                                 <DrivererPublication />
                             </div>
                             <div class="tab-pane fade" id="demand" role="tabpanel" aria-labelledby="demand-tab">
-                                <Link to='/search'>
+                                {/* <Link to='/search'>
                                     <Button> search a provider</Button>
-                                </Link>
+                                </Link> */}
                                 <DrivererPublication />
                             </div>
                         </div>

@@ -32,7 +32,7 @@ import SignUpDriver from "./components/register/SignUpDriver";
 import SignUpPassenger from "./components/register/SignUpPassenger";
 import PassengerProfile from "./components/passenger/PassengerProfile";
 import EditPassengerProfile from "./components/passenger/EditPassengerProfile";
-import AddRide from "./components/common/passenger/AddRide";
+import AddRide from "./components/common/driver/AddRide";
 import DriverProfile from "./components/common/driver/DriverProfile";
 import EditProfileDriver from "./components/common/driver/EditProfileDriver";
 
