@@ -425,7 +425,7 @@ input {
 .address {
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(0 0 0 / 15%) 0px 4px 16px;
-  height: 32.0625rem;
+  height: 600px;
   left: 2%;
   position: fixed;
   top: 13%;
@@ -535,7 +535,10 @@ input {
 }
 
 .search__result-item {
-  border-bottom: 1px solid #ccc;
+  /* z-index: 1000; 
+	position: absolute;   */
+  background-color: #f0f2f5;
+  border-bottom: 1px solid #000000;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: max-content auto;

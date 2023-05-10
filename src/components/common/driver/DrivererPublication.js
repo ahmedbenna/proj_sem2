@@ -3,14 +3,14 @@ import React from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
 // import ContractDetails from './ContractDetails';
-import PublicationDeatilsPassenger from './PublicationDeatilsPassenger';
+import PublicationDeatils from './PublicationDeatilsDriver';
 
 
 
-export default function PassengerPublication() {
-    const idp = JSON.parse(localStorage.getItem('idp'))
+export default function DrivererPublication() {
+    const idd = JSON.parse(localStorage.getItem('idd'))
 
-    console.log(idp.id)
+    console.log(idd)
     const [isLoading, setLoading] = React.useState(true);
     const [pending, setPending] = React.useState(null);
     const [accept, setAccept] = React.useState(null);
@@ -20,7 +20,7 @@ export default function PassengerPublication() {
 
         async function getDemande() {
             try {
-                const response = await axios.get('/demande/pending/conducteur/' + idp );
+                const response = await axios.get('/demande/pending/conducteur/' + idd );
                 console.log(response);
                 setPending(response.data);
                 console.log("pending", pending);
@@ -29,7 +29,7 @@ export default function PassengerPublication() {
                 console.error(error);
             }
             try {
-                const response = await axios.get('/demande/accepter/passager/' + idp );
+                const response = await axios.get('/demande/accepter/conducteur/' + idd );
                 console.log(response);
                 setAccept(response.data);
                 console.log("accept", accept);
@@ -38,7 +38,7 @@ export default function PassengerPublication() {
                 console.error(error);
             }
             try {
-                const response = await axios.get('/demande/rejeter/passager/' + idp );
+                const response = await axios.get('/demande/rejeter/conducteur/' + idd );
                 console.log(response);
                 setReject(response.data);
                 console.log("reject", reject);
@@ -87,7 +87,7 @@ export default function PassengerPublication() {
                                         <p class="text-muted mb-0">{cont.job.title}</p>
                                     </td>
                                     <td>
-                                        <PublicationDeatilsPassenger c={cont} />
+                                        <PublicationDeatils c={cont} />
                                     </td>
                                 </tr>
                             )}

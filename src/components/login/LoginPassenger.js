@@ -53,6 +53,8 @@ export default function LoginPassenger() {
 
   return (
     <ThemeProvider theme={theme}>
+
+
       <Container style={{ backgroundColor: 'white' }} component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -144,6 +146,12 @@ export default function LoginPassenger() {
                   <Grid item>
                     <Link to="/signUpPassenger">
                       {"Don't have an account?    Sign Up"}
+                    </Link>
+                  </Grid>
+                  <Grid item style={{ marginBottom: '50px', marginTop: '20px' }}>
+                    <Link style={{textDecoration:'none',color:'#3FCEA8'}} to="/loginDriver">
+                      <Typography variant='button'>                      {"Are you a Driver?    Login"}
+                      </Typography>
                     </Link>
                   </Grid>
                 </Grid>

@@ -8,7 +8,7 @@ import {
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 // import Chat from "./components/chat/Chat";
@@ -32,6 +32,9 @@ import SignUpDriver from "./components/register/SignUpDriver";
 import SignUpPassenger from "./components/register/SignUpPassenger";
 import PassengerProfile from "./components/passenger/PassengerProfile";
 import EditPassengerProfile from "./components/passenger/EditPassengerProfile";
+import AddRide from "./components/common/passenger/AddRide";
+import DriverProfile from "./components/common/driver/DriverProfile";
+import EditProfileDriver from "./components/common/driver/EditProfileDriver";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -190,6 +193,9 @@ function App() {
           <Route exact path="/passengerProfile ">
             <PassengerProfile />
           </Route>
+          {/* <Route exact path="/driverProfile ">
+            <DriverProfile />
+          </Route> */}
           <Route exact path="/signUpDriver">
             <SignUpDriver />
           </Route>
@@ -199,6 +205,15 @@ function App() {
           <Route exact path="/editPassengerProfile">
             <EditPassengerProfile />
           </Route>
+          <Route exact path="/editProfileDriver">
+            <EditProfileDriver />
+          </Route>
+          <Route exact path="/driverProfile">
+            <DriverProfile />
+          </Route>
+          <Route exact path="/addRide">
+            <AddRide />
+          </Route>
           {/* <Route path='/passengerProfile' element={<PassengerProfile />} /> */}
 
           {/* <Route exact path="*">
@@ -206,7 +221,7 @@ function App() {
           </Route> */}
         </Switch>
         <Footer/>
-        <PassengerProfile />
+        {/* <DriverProfile /> */}
       </Router>
       <Loading />
     </Context.Provider>

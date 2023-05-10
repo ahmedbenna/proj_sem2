@@ -42,6 +42,7 @@ const HeaderPassenger = () => {
   
       } catch (error) {
         console.error(error);
+        localStorage.removeItem('idp')
       }
     }
     getUser()

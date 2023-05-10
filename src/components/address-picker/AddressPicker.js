@@ -8,7 +8,13 @@ import Context from "../../context";
 
 const AddressPicker = ({ toggleModal }) => {
   const [isFrom, setIsFrom] = useState(true);
-  const [searchResults, setSearchResults] = useState([]);
+  const [price, setPrice] = useState(null);
+  const [seat, setSeat] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const [description, setDescription] = useState(null);
+  const [searchResults, setSearchResults] = useState(null);
+  
+
 
   const { selectedFrom, setSelectedFrom, selectedTo, setSelectedTo } =
     useContext(Context);
@@ -66,11 +72,11 @@ const AddressPicker = ({ toggleModal }) => {
     <div className="address">
       <div className="address__title" >
         <div >
-        <h3  style={{textAlign: 'center'}}>Add Trip</h3>
+          <h3 style={{ textAlign: 'center' }}>Add Trip</h3>
 
         </div>
         <div className="address__title-container">
-          
+
           <p className="address__title-from" onClick={() => setIsFrom(true)}>
             {selectedFrom && selectedFrom.label
               ? selectedFrom.label
@@ -93,7 +99,26 @@ const AddressPicker = ({ toggleModal }) => {
           onChange={onInputChanged}
           ref={searchRef}
         />
-        
+        {/* <input
+          className="search__input"
+          type="text"
+
+        // onChange={onInputChanged}
+        // ref={searchRef}
+
+        /> */}
+        <input className="search__input"
+          type="text" placeholder="Number of seats" value={seat} />
+        <input className="search__input"
+          type="text" placeholder="Price" value={price}/>
+        <input className="search__input"
+          type="datetime-local" placeholder="Whene?" value={date} />
+        <textarea
+          className="signup__about"
+          placeholder="Description"
+          value={description}
+        ></textarea>
+
 
         <div className="search__result">
           {searchResults &&
@@ -129,4 +154,4 @@ const AddressPicker = ({ toggleModal }) => {
   );
 };
 
-export default withModal(RequestRide)(AddressPicker);
+export default AddressPicker;

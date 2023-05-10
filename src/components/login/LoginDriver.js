@@ -24,6 +24,7 @@ const theme = createTheme();
 export default function LoginDriver() {
 
   const [formData, setformData] = React.useState()
+  const [err, setErr] = React.useState(false)
 
   async function auth() {
     try {
@@ -50,8 +51,8 @@ export default function LoginDriver() {
   })
 
   return (
-    <ThemeProvider  theme={theme}>
-      <Container style={{backgroundColor:'white'}}  component="main" maxWidth="xs">
+    <ThemeProvider theme={theme}>
+      <Container style={{ backgroundColor: 'white' }} component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -73,6 +74,7 @@ export default function LoginDriver() {
               password: "",
             }}
             onSubmit={async (values) => {
+              setErr(false)
               setformData({
                 email: values.email,
                 password: values.password,
@@ -83,10 +85,15 @@ export default function LoginDriver() {
               })
                 .then(response => {
                   console.log(response)
-                  localStorage.setItem('idp', JSON.stringify(response.data.id ))
+                  localStorage.setItem('idp', JSON.stringify(response.data.id))
                   window.location.replace("/")
                 })
-                .catch(error => console.error(error))
+                .catch(error => {
+                  console.error(error)
+                  setErr(true)
+                }
+
+                )
             }}
           >
             {props => (
@@ -121,6 +128,8 @@ export default function LoginDriver() {
                   helperText={props.touched.password && props.errors.password}
                   autoComplete="current-password"
                 />
+                {(err) ? (<Typography color={'red'}> Email or Password is not valid</Typography>
+                ) : ('')}
 
                 <Button
                   type="submit"

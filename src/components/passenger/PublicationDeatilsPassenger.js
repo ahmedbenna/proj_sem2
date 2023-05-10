@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PublicationDeatils(props) {
+export default function PublicationDeatilsPassenger(props) {
     const [open, setOpen] = React.useState(false);
     const [viewport, setViewport] = useState({
         latitude: props.c.latitude,
