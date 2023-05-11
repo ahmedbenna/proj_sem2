@@ -11,7 +11,7 @@ export default function Search() {
 
   const location = useLocation()
 
-  console.log("ddd",location)
+  console.log("ddd", location)
 
 
   const [result, setResult] = useState(null)
@@ -35,7 +35,13 @@ export default function Search() {
   const search = async () => {
     const { from, destination } = getInputs();
     try {
-      const response = await axios.get('publication/')
+      const response = await axios.get('publication/recherche', {
+        params: {
+          LieuD: from,
+          LieuA: destination,
+        },
+      }
+      )
       console.log(response)
       setResult(response.data)
     }
@@ -79,7 +85,10 @@ export default function Search() {
           <div className="row">
             <div className="col-lg-8">
               <div className="items">
-                {(result) ? (<SearchCard pub={null} />
+                {(result) ? (
+                  result.map(pub =>
+                    <SearchCard pub={pub} />
+                  )
                 ) : (
                   <h3>
                     NO Result

@@ -14,6 +14,7 @@ import "./assets/css/fontawesome.css"
 import "./assets/css/styles.css"
 import Home from '../../home/Home';
 import { useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function stringToColor(string) {
     let hash = 0;
@@ -47,18 +48,7 @@ export default function DrivererPublication() {
     const [selectedPub, setSelectedPub] = useState()
     useEffect(() => {
 
-        async function getPublication() {
 
-            try {
-                const response = await axios.get('/publication/conducteur/' + idd);
-                console.log(response);
-                setPublication(response.data);
-                console.log("publication", publication);
-                setLoading(false);
-            } catch (error) {
-                console.error(error);
-            }
-        }
         getPublication()
     }, [isLoading])
     function stringAvatar(name) {
@@ -69,6 +59,33 @@ export default function DrivererPublication() {
             children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
         };
     }
+    async function getPublication() {
+
+        try {
+            const response = await axios.get('/publication/conducteur/' + idd);
+            console.log(response);
+            setPublication(response.data);
+            console.log("publication", publication);
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleDelete = async () => {
+        setLoading(true)
+        try {
+            const response = await axios.delete('/publication/' + idd)
+            console.log(response)
+            getPublication()
+            setLoading(false)
+        }
+        catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+
+    }
     if (isLoading) {
 
         return <div className="App"><CircularProgress /></div>;
@@ -76,7 +93,7 @@ export default function DrivererPublication() {
     return (
         <div>
             <div>
-                <RideMap selectedPub={selectedPub} />
+                {/* <RideMap selectedPub={selectedPub} /> */}
             </div>
             {
                 (publication) ? (
@@ -138,7 +155,11 @@ export default function DrivererPublication() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Button onClick={()=>setSelectedPub(pub)} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
+                                                    <Link to='/editRide' state={{pub:pub }}>
+                                                        <Button variant='contained'>edit</Button>
+                                                    </Link>
+                                                    <Button onClick={handleDelete} variant='contained' > delete</Button>
+                                                    <Button onClick={() => setSelectedPub(pub)} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
                                                 </div>
                                             </div>
                                         </div>

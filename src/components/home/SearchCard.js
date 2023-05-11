@@ -1,125 +1,141 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Avatar, Button, CircularProgress, Typography } from '@mui/material';
+import React from 'react'
+import { useEffect } from 'react';
+import axios from 'axios';
+// import ContractDetails from './ContractDetails';
+// import PublicationDeatils from './PublicationDeatilsDriver';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import moment from 'moment';
+// import RideMap from '../RideMap';
+//avatar____________________________
+import "../common/driver/assets/css/bootstrap.min.css"
+import "../common/driver/assets/css/fontawesome.css"
+import "../common/driver/assets/css/styles.css"
+// import Home from '../../home/Home';
+import { useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-import L from "leaflet";
+function stringToColor(string) {
+    let hash = 0;
+    let i;
 
-require("leaflet-routing-machine");
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
 
-export default function SearchCard() {
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+}
 
 
-    const map = useRef();
-    const routeControl = useRef();
+export default function DrivererPublication(props) {
+    const idd = JSON.parse(localStorage.getItem('idd'))
 
-    const [selectedFrom, setSelectedFrom] = useState()
-    const [selectedTo, setSelectedTo] = useState()
-
+    console.log(idd)
+    const [isLoading, setLoading] = React.useState(true);
+    const [pending, setPending] = React.useState(null);
+    const [accept, setAccept] = React.useState(null);
+    const [publication, setPublication] = React.useState(null);
+    const [selectedPub, setSelectedPub] = useState()
     useEffect(() => {
 
-    }, [])
 
-    const style = {
-        marginTop: "50px",
-        width: "100%",
-        height: "100vh",
-    };
-
-    useEffect(() => {
-        initMap();
-        initRouteControl();
-      }, []);
-    
-      const drawRoute = useCallback((from, to) => {
-        if (shouldDrawRoute(from, to) && routeControl && routeControl.current) {
-          const fromLatLng = new L.LatLng(from.y, from.x);
-          const toLatLng = new L.LatLng(to.y, to.x);
-          routeControl.current.setWaypoints([fromLatLng, toLatLng]);
-        }
-      }, []);
-
-    useEffect(() => {
-        if (shouldDrawRoute(selectedFrom, selectedTo)) {
-            drawRoute(selectedFrom, selectedTo);
-        }
-    }, [selectedFrom, selectedTo, drawRoute]);
-    const shouldDrawRoute = (selectedFrom, selectedTo) => {
-        return (
-            selectedFrom?.label &&
-            selectedTo?.label &&
-            selectedFrom?.x &&
-            selectedTo?.x &&
-            selectedFrom?.y &&
-            selectedTo?.y
-        );
-    };
-    const initMap = () => {
-        map.current = L.map("map", {
-            center: [36.900791, 10.178942],
-            zoom: 13,
-            layers: [
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?lang=en", {
-                    attribution:
-                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                }),
-            ],
-        });
-    };
-
-    const initRouteControl = () => {
-        routeControl.current = L.Routing.control({
-            show: true,
-            fitSelectedRoutes: true,
-            plan: false,
-            lineOptions: {
-                styles: [
-                    {
-                        color: "blue",
-                        opacity: "0.7",
-                        weight: 6,
-                    },
-                ],
+        // getPublication()
+    }, [isLoading])
+    function stringAvatar(name) {
+        return {
+            sx: {
+                bgcolor: stringToColor(name),
             },
-            router: L.Routing.mapbox('pk.eyJ1IjoiOWE3dDYiLCJhIjoiY2xiZWF1MWdlMDluOTNvcGF6Zmx3bng2ayJ9.8bB7_aVExETntLYL9F0fOA'),
-        })
-            .addTo(map.current)
-            .getPlan();
-    };
-    return (
-        <div className="row">
-            <div className="col-lg-12">
-                <div className="item">
-                    <div className="row">
-                        <div className="col-lg-4 col-sm-5">
-                            <div className="image">
-                                <div id="map" style={style} />
-                            </div>
-                            <div className="col-lg-8 col-sm-7">
-                                <div className="right-content">
-                                    <ul className="info">
-                                        <li><i className="fa fa-location"></i> From</li>
-                                        <li> Destination</li>
-                                        <li> Price</li>
-                                    </ul>
-                                    {/* <span>Europe</span> */}
-                                    {/* <div className="main-button">
-                              <a href="about.html">Explore More</a>
-                            </div> */}
-                                    {/* <p>Woox Travel is a professional Bootstrap 5 theme HTML CSS layout for your website. You can use this layout for your commercial work.</p> */}
-                                    <ul className="info">
-                                        <li><i className="fa fa-user"></i> name</li>
-                                        <li> Email</li>
-                                        <li> Phone</li>
-                                        <li> Description</li>
+            children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+        };
+    }
+    // async function getPublication() {
 
-                                    </ul>
-                                    <div className="text-button">
-                                        <a href="about.html">Reserve <i className="fa fa-arrow-right"></i></a>
+    //     try {
+    //         const response = await axios.get('/publication/conducteur/' + idd);
+    //         console.log(response);
+    //         setPublication(response.data);
+    //         console.log("publication", publication);
+    //         setLoading(false);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+
+    // const handleDelete = async () => {
+    //     setLoading(true)
+    //     try {
+    //         const response = await axios.delete('/publication/' + idd)
+    //         console.log(response)
+    //         getPublication()
+    //         setLoading(false)
+    //     }
+    //     catch (error) {
+    //         console.log(error)
+    //         setLoading(false)
+    //     }
+
+    // }
+    // if (isLoading) {
+
+    //     return <div className="App"><CircularProgress /></div>;
+    // }
+    return (
+        <div>
+            <div class="history-items-container history-items-padding ">
+                <div class="history-item">
+
+
+                    {/* <div id="map1"></div> */}
+
+                    <div class="border-bottom-primary thin">
+                        <div class="status-container">
+                            <div class="date float-left">
+                                {moment(props.pub.dateDepart).calendar()}
+                            </div>
+                            <div class="status-none float-right text-uppercase">
+                                {props.pub.prix}DT
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div class="addresses-container position-relative">
+                        <div class="height-auto">
+                            <div class="w-100 map-input-container map-input-container-top">
+                                <span class="fas fa-location-arrow location-icon-rotate  map-input-icon"></span>
+                                <div class="map-input display-flex" style={{ height: '100px' }}>
+                                    <input class="controls flex-1 font-weight-light" type="text"
+                                        placeholder="Enter an origin location" value={props.pub.lieuDepart} disabled />
+                                </div>
+                            </div>
+                            <div class="href-decoration-none">
+                                <div class="w-100 map-input-container map-input-container-bottom">
+                                    <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
+                                    <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
+                                        {props.pub.lieuArrive}
                                     </div>
+                                    <span class="dotted-line"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                   
                 </div>
             </div>
+
+
         </div>
     )
 }

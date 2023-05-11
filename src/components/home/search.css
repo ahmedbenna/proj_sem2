@@ -862,7 +862,7 @@ legend {
 }
 
 .s013 {
-  min-height: 100vh;
+  min-height: 400px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;

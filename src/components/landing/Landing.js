@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react'
 
 import "./css/main.css"
+import landingimg from "./images/landing.jpg"
 import { Link } from 'react-router-dom';
 // import './assets/css/templatemo-woox-travel.css';
 // import './assets/css/owl.css';
@@ -60,13 +61,13 @@ export default function Landing() {
         }
     }
     return (
-        <div className="s013" style={{ backgroundColor: '#232223' }}>
-            <form>
+        <div className="s013" style={{ backgroundImage: `url(${landingimg})` }}>
+            <form style={{ marginTop:'250px'}}>
                 <fieldset>
-                    <legend>QUICK FIND YOUR TRIP</legend>
+                    <legend style={{color : 'black'}}>QUICK FIND YOUR TRIP</legend>
                 </fieldset>
-                <div className="inner-form">
-                    <div className="left">
+                <div className="inner-form" style={{ padding: '10px', backgroundColor: '#232223' }}>
+                    <div className="left" >
                         <div className="input-wrap first">
                             <div className="input-field first">
                                 <label>From</label>
@@ -76,11 +77,11 @@ export default function Landing() {
                         <div className="input-wrap second">
                             <div className="input-field second">
                                 <label>Destination</label>
-                                <input type="text" value={destination} onChange={e => setDestination(e.currentTarget.value)}  />
+                                <input type="text" value={destination} onChange={e => setDestination(e.currentTarget.value)} />
                             </div>
                         </div>
                     </div>
-                    <Link to='/search' state={{ from:' from, destination: destination '}}>
+                    <Link to='/search' state={{ from: ' from, destination: destination ' }}>
                         <button className="btn-search" type="button">SEARCH</button>
                     </Link>
                 </div>

@@ -9,14 +9,21 @@ import { useCallback } from 'react';
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import { Button } from '@mui/material';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+export default function EditRide(props) {
 
-export default function AddRide() {
+
+    const location = useLocation()
 
     const id = JSON.parse(localStorage.getItem('idd'))
     const map = useRef();
     const routeControl = useRef();
     const [from, setFrom] = useState()
+    const [yf, setYf] = useState()
+    const [xf, setXf] = useState()
     const [destination, setDestination] = useState()
+    const [xd, setXd] = useState()
+    const [yd, setYd] = useState()
     const [isLoading, setIsLoading] = useState(false);
 
     const [isFrom, setIsFrom] = useState(true);
@@ -36,8 +43,23 @@ export default function AddRide() {
         height: "100vh",
     };
 
+    const getPub = ()=>{
+        console.log('location',location)
+
+        setFrom(props.pub.lieuDepart)
+        setXf(props.pub.xd)
+        setYf(props.pub.yd)
+        setDestination(props.pub.lieuArrive)
+        setXd(props.pub.xa)
+        setYd(props.pub.xa)
+        setPrice(props.pub.prix)
+        setSeat(props.pub.nbrePlace)
+        setDate(props.pub.dateDepart)
+        setDescription(props.pub.description)
+    }
 
     useEffect(() => {
+        getPub()
         initMap();
         initRouteControl();
         initProvider();
@@ -145,7 +167,7 @@ export default function AddRide() {
     const addRide = async () => {
         setIsLoading(true)
         try {
-            const response = await axios.post('publication/conducteur/' + id
+            const response = await axios.put('publication/' + props.id
                 , {
                     lieuDepart: from.label,
                     xd:from.x,

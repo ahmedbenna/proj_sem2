@@ -35,6 +35,8 @@ import EditPassengerProfile from "./components/passenger/EditPassengerProfile";
 import AddRide from "./components/common/driver/AddRide";
 import DriverProfile from "./components/common/driver/DriverProfile";
 import EditProfileDriver from "./components/common/driver/EditProfileDriver";
+import EditRide from "./components/common/driver/EditRide";
+import DemandRide from "./components/common/DemandRide";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -214,6 +216,14 @@ function App() {
           <Route exact path="/addRide">
             <AddRide />
           </Route>
+          <Route exact path="/editRide">
+            <EditRide />
+          </Route>
+          
+          <Route exact path="/demandRide">
+            <DemandRide />
+          </Route>
+          
           {/* <Route path='/passengerProfile' element={<PassengerProfile />} /> */}
 
           {/* <Route exact path="*">
