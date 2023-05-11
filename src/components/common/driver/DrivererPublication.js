@@ -13,6 +13,7 @@ import "./assets/css/bootstrap.min.css"
 import "./assets/css/fontawesome.css"
 import "./assets/css/styles.css"
 import Home from '../../home/Home';
+import { useState } from 'react';
 
 function stringToColor(string) {
     let hash = 0;
@@ -43,7 +44,7 @@ export default function DrivererPublication() {
     const [pending, setPending] = React.useState(null);
     const [accept, setAccept] = React.useState(null);
     const [publication, setPublication] = React.useState(null);
-
+    const [selectedPub, setSelectedPub] = useState()
     useEffect(() => {
 
         async function getPublication() {
@@ -75,7 +76,7 @@ export default function DrivererPublication() {
     return (
         <div>
             <div>
-                <RideMap />
+                <RideMap selectedPub={selectedPub} />
             </div>
             {
                 (publication) ? (
@@ -125,7 +126,7 @@ export default function DrivererPublication() {
                                                                     placeholder="Enter an origin location" value={pub.lieuDepart} disabled />
                                                             </div>
                                                         </div>
-                                                        <div  class="href-decoration-none">
+                                                        <div class="href-decoration-none">
                                                             <div class="w-100 map-input-container map-input-container-bottom">
                                                                 <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
                                                                 <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
@@ -137,7 +138,7 @@ export default function DrivererPublication() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Button  class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
+                                                    <Button onClick={()=>setSelectedPub(pub)} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +151,7 @@ export default function DrivererPublication() {
                     </>
                 ) : ('')
             }
-            
+
 
         </div>
     )

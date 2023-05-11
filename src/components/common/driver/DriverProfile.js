@@ -139,7 +139,7 @@ export default function DriverProfile() {
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <Link to='/addRide'>
-                                    <Button> Add Ride</Button>
+                                    <Button variant='contained'> Add Ride</Button>
                                 </Link>
                                 <DrivererPublication />
                             </div>
