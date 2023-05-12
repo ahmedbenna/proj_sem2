@@ -10,7 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button, CircularProgress } from "@mui/material";
 import logo from "./cover2.png"
-
+import DriveEtaIcon from '@mui/icons-material/DriveEta';
 const HeaderPassenger = () => {
   const [passager, setPassager] = useState();
   const [isLoading, setIsloading] = useState(true);
@@ -94,8 +94,8 @@ const HeaderPassenger = () => {
               <a className="nav-link" href="#">Services</a>
             </li>
             <li className="nav-item">
-            <Link className="nav-link" to="/profilePasssenger">
-              <AccountCircleIcon />  Add a Ride 
+            <Link className="nav-link" to="/search">
+              <DriveEtaIcon />  Find a Ride 
             </Link>
               {/* <a className="nav-link" href="#">Contact</a> */}
             </li>

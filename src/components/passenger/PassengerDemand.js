@@ -1,12 +1,35 @@
 import { CircularProgress, Typography } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
 // import ContractDetails from './ContractDetails';
 import PublicationDeatilsPassenger from './PublicationDeatilsPassenger';
 import moment from 'moment';
+import RideMap from '../common/RideMap';
+import DemandCard from './DemandCard';
+import './DemandCard.css'
+function stringToColor(string) {
+    let hash = 0;
+    let i;
 
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
 
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+}
+const style = {
+
+}
 
 export default function PassengerDemand() {
     const idp = JSON.parse(localStorage.getItem('idp'))
@@ -17,13 +40,14 @@ export default function PassengerDemand() {
     const [accept, setAccept] = React.useState(null);
     const [reject, setReject] = React.useState(null);
     const [error, setError] = React.useState(false);
+    const [selectedPub, setSelectedPub] = useState()
 
 
     useEffect(() => {
 
         async function getDemande() {
             try {
-                const response = await axios.get('/demande/pending/passager/' + idp );
+                const response = await axios.get('/demande/pending/passager/' + idp);
                 console.log(response);
                 setPending(response.data);
                 console.log("pending", pending);
@@ -32,7 +56,7 @@ export default function PassengerDemand() {
                 console.error(error);
             }
             try {
-                const response = await axios.get('/demande/accepter/passager/' + idp );
+                const response = await axios.get('/demande/accepter/passager/' + idp);
                 console.log(response);
                 setAccept(response.data);
                 console.log("accept", accept);
@@ -41,7 +65,7 @@ export default function PassengerDemand() {
                 console.error(error);
             }
             try {
-                const response = await axios.get('/demande/rejeter/passager/' + idp );
+                const response = await axios.get('/demande/rejeter/passager/' + idp);
                 console.log(response);
                 setReject(response.data);
                 console.log("reject", reject);
@@ -73,136 +97,69 @@ export default function PassengerDemand() {
     }
     return (
         <div>
-            {(pending) ? (
-                <> 
-                <div class="col-md-6">
-                    <label>Pendings</label>
-                </div>
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Driver</th>
-                                <th>Trip</th>
-                                {/* <th>response</th> */}
-                                {/* <th>Position</th>
-                        <th>Actions</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pending.map(cont =>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
+            <div>
+                {(selectedPub) ? (
+                    <RideMap pub={selectedPub} />
 
-                                            <div class="ms-3">
-                                                <p class="fw-bold mb-1">{cont.conducteur.prenom} {cont.conducteur.nom}</p>
-                                                <p class="text-muted mb-0">{cont.conducteur.email}</p>
-                                                <p class="text-muted mb-0">{moment(cont.publication.dateDepart).calendar()}</p>
-                                                
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="fw-normal mb-1">{cont.publication.lieuDepart}</p>
-                                        <p class="text-muted mb-0">{cont.publication.lieuArrive}</p>
-                                    </td>
-                                    <td>
-                                        
-                                        {/* <span onClick={handleCancelRide(cont.id)} class="badge badge-danger rounded-pill d-inline">Cancle</span> */}
-                                        {(error)?(<Typography style={{color:'red'}} > error</Typography>):('')}
-                                    </td>
-                                    <td>
-                                        {/* <PublicationDeatilsPassenger c={cont} /> */}
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                ) : ('')}
+            </div>
+            {(pending) ? (
+                <>
+                    <div class="col-md-6">
+                        <label>Pendings</label>
+                    </div>
+
+                    {pending.map(pub =>
+                        <div href='#' className='box' onClick={() => {
+                            console.log("hi")
+                            setSelectedPub(pub.publication)
+                        }}>
+                            <DemandCard pub={pub} />
+
+                        </div>
+
+
+                    )}
+
                 </>
 
             ) : ('')
-            (accept)?(
-                <> 
-                <div class="col-md-6">
-                    <label>Pendings</label>
-                </div>
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
-                            <tr>
-                            <th>Driver</th>
-                                <th>Trip</th>
-                                <th>response</th>
-                                {/* <th>Position</th>
-                        <th>Actions</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {accept.map(cont =>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
+                (accept) ? (
+                <>
+                    <div class="col-md-6">
+                        <label>Accepted</label>
+                    </div>
 
-                                            <div class="ms-3">
-                                                <p class="fw-bold mb-1">{cont.conducteur.prenom} {cont.conducteur.nom}</p>
-                                                <p class="text-muted mb-0">{cont.conducteur.email}</p>
-                                                <p class="text-muted mb-0">{moment(cont.publication.dateDepart).calendar()}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {/* <p class="fw-normal mb-1">{cont.publicqtion.lieuDepart}</p>
-                                        <p class="text-muted mb-0">{cont.publication.lieuArrive}</p> */}
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-danger rounded-pill d-inline">Cancle</span>
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </>
-            ):('')
-            (reject)?(
-                <> 
-                <div class="col-md-6">
-                    <label>Pendings</label>
-                </div>
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
-                            <tr>
-                            <th>Driver</th>
-                                <th>Trip</th>
-                                <th>response</th>
-                                {/* <th>Position</th>
-                        <th>Actions</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {reject.map(cont =>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
+                    {accept.map(pub =>
+                        <div href='#' className='box' onClick={() => {
+                            console.log("hi")
+                            setSelectedPub(pub.publication)
+                        }}>
+                            <DemandCard pub={pub} />
 
-                                            <div class="ms-3">
-                                                <p class="fw-bold mb-1">{cont.conducteur.prenom} {cont.conducteur.nom}</p>
-                                                <p class="text-muted mb-0">{cont.conducteur.email}</p>
-                                                <p class="text-muted mb-0">{moment(cont.publication.dateDepart).calendar()}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {/* <p class="fw-normal mb-1">{cont.publicqtion.lieuDepart}</p>
-                                        <p class="text-muted mb-0">{cont.publication.lieuArrive}</p> */}
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-danger rounded-pill d-inline">Cancle</span>
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                        </div>
+                    )}
+
                 </>
-            ):('')
+            ) : ('')
+                (reject) ? (
+                <>
+                    <div class="col-md-6">
+                        <label>Rejected</label>
+                    </div>
+
+                    {reject.map(pub =>
+                        <div href='#' className='box' onClick={() => {
+                            console.log("hi")
+                            setSelectedPub(pub.publication)
+                        }}>
+                            <DemandCard pub={pub} />
+
+                        </div>
+                    )}
+
+                </>
+            ) : ('')
             }
 
         </div>
