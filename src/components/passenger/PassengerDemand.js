@@ -1,13 +1,14 @@
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import React from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
 // import ContractDetails from './ContractDetails';
 import PublicationDeatilsPassenger from './PublicationDeatilsPassenger';
+import moment from 'moment';
 
 
 
-export default function PassengerPublication() {
+export default function PassengerDemand() {
     const idp = JSON.parse(localStorage.getItem('idp'))
 
     console.log(idp.id)
@@ -15,12 +16,14 @@ export default function PassengerPublication() {
     const [pending, setPending] = React.useState(null);
     const [accept, setAccept] = React.useState(null);
     const [reject, setReject] = React.useState(null);
+    const [error, setError] = React.useState(false);
+
 
     useEffect(() => {
 
         async function getDemande() {
             try {
-                const response = await axios.get('/demande/pending/conducteur/' + idp );
+                const response = await axios.get('/demande/pending/passager/' + idp );
                 console.log(response);
                 setPending(response.data);
                 console.log("pending", pending);
@@ -49,6 +52,21 @@ export default function PassengerPublication() {
         }
         getDemande()
     }, [isLoading])
+
+    // const handleCancelRide = async (id)=>{
+    //     setError(false)
+    //     // setLoading(true)
+    //     try{
+    //         const response = await axios.delete('/demande/'+id)
+    //         console.log(response)
+    //         // setLoading(false)
+    //     }catch(error){
+    //         console.log(error)
+    //         setError(true)
+    //         // setLoading(false)
+
+    //     }
+    // }
     if (isLoading) {
 
         return <div className="App"><CircularProgress /></div>;
@@ -77,17 +95,24 @@ export default function PassengerPublication() {
                                         <div class="d-flex align-items-center">
 
                                             <div class="ms-3">
-                                                <p class="fw-bold mb-1">{cont.provider.firstName} {cont.provider.lastName}</p>
-                                                <p class="text-muted mb-0">{cont.provider.email}</p>
+                                                <p class="fw-bold mb-1">{cont.conducteur.prenom} {cont.conducteur.nom}</p>
+                                                <p class="text-muted mb-0">{cont.conducteur.email}</p>
+                                                <p class="text-muted mb-0">{moment(cont.publication.dateDepart).calendar()}</p>
+                                                
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="fw-normal mb-1">{cont.provider.speciality.label}</p>
-                                        <p class="text-muted mb-0">{cont.job.title}</p>
+                                        <p class="fw-normal mb-1">{cont.publication.lieuDepart}</p>
+                                        <p class="text-muted mb-0">{cont.publication.lieuArrive}</p>
                                     </td>
                                     <td>
-                                        <PublicationDeatilsPassenger c={cont} />
+                                        
+                                        {/* <span onClick={handleCancelRide(cont.id)} class="badge badge-danger rounded-pill d-inline">Cancle</span> */}
+                                        {(error)?(<Typography style={{color:'red'}} > error</Typography>):('')}
+                                    </td>
+                                    <td>
+                                        {/* <PublicationDeatilsPassenger c={cont} /> */}
                                     </td>
                                 </tr>
                             )}
@@ -118,18 +143,19 @@ export default function PassengerPublication() {
                                         <div class="d-flex align-items-center">
 
                                             <div class="ms-3">
-                                                <p class="fw-bold mb-1">{cont.provider.firstName} {cont.provider.lastName}</p>
-                                                <p class="text-muted mb-0">{cont.provider.email}</p>
+                                                <p class="fw-bold mb-1">{cont.conducteur.prenom} {cont.conducteur.nom}</p>
+                                                <p class="text-muted mb-0">{cont.conducteur.email}</p>
+                                                <p class="text-muted mb-0">{moment(cont.publication.dateDepart).calendar()}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="fw-normal mb-1">{cont.provider.speciality.label}</p>
-                                        <p class="text-muted mb-0">{cont.job.title}</p>
+                                        {/* <p class="fw-normal mb-1">{cont.publicqtion.lieuDepart}</p>
+                                        <p class="text-muted mb-0">{cont.publication.lieuArrive}</p> */}
                                     </td>
-                                    {/* <td>
-                                        <span class="badge badge-success rounded-pill d-inline">{cont.response}</span>
-                                    </td> */}
+                                    <td>
+                                        <span class="badge badge-danger rounded-pill d-inline">Cancle</span>
+                                    </td>
                                 </tr>
                             )}
                         </tbody>
@@ -158,18 +184,19 @@ export default function PassengerPublication() {
                                         <div class="d-flex align-items-center">
 
                                             <div class="ms-3">
-                                                <p class="fw-bold mb-1">{cont.provider.firstName} {cont.provider.lastName}</p>
-                                                <p class="text-muted mb-0">{cont.provider.email}</p>
+                                                <p class="fw-bold mb-1">{cont.conducteur.prenom} {cont.conducteur.nom}</p>
+                                                <p class="text-muted mb-0">{cont.conducteur.email}</p>
+                                                <p class="text-muted mb-0">{moment(cont.publication.dateDepart).calendar()}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="fw-normal mb-1">{cont.provider.speciality.label}</p>
-                                        <p class="text-muted mb-0">{cont.job.title}</p>
+                                        {/* <p class="fw-normal mb-1">{cont.publicqtion.lieuDepart}</p>
+                                        <p class="text-muted mb-0">{cont.publication.lieuArrive}</p> */}
                                     </td>
-                                    {/* <td>
-                                        <span class="badge badge-success rounded-pill d-inline">{cont.response}</span>
-                                    </td> */}
+                                    <td>
+                                        <span class="badge badge-danger rounded-pill d-inline">Cancle</span>
+                                    </td>
                                 </tr>
                             )}
                         </tbody>

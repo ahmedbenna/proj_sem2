@@ -3,12 +3,13 @@ import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+// import background from './header.jpg'
+import logo from "./cover2.png"
 import Context from "../../context";
 import axios from "axios";
 import Loading from "./Loading";
 import { Button, CircularProgress } from "@mui/material";
-
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 const HeaderDriver = () => {
     const [driver, setDriver] = useState();
     const [isLoading, setIsloading] = useState(true);
@@ -18,7 +19,7 @@ const HeaderDriver = () => {
         try {
             const response = await axios.get('/conducteur/' + id);
             console.log(response);
-            
+
             setDriver(response.data)
             setIsloading(false)
             console.log('aaaaaaaaaaaaaaa', response.data)
@@ -37,8 +38,8 @@ const HeaderDriver = () => {
         // const isLogout = window.confirm("Do you want to log out ?");
         // if (isLogout) {
 
-            removeAuthedInfo();
-            window.location = '/'
+        removeAuthedInfo();
+        window.location = '/'
         // }
     };
 
@@ -53,9 +54,11 @@ const HeaderDriver = () => {
         return <div className="App"><CircularProgress /></div>;
     }
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div className="container">
-                <Link to="/" className="navbar-brand" >Covoi</Link>
+        <nav style={{ backgroundColor: '#003fba' }} className=" text-white navbar navbar-expand-lg navbar-light fixed-top">
+            <div className="container" >
+                <Link to="/" >
+                    <img src={logo} height={40} />
+                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -71,7 +74,10 @@ const HeaderDriver = () => {
                             <a className="nav-link" href="#">Services</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Contact</a>
+                            <Link className="nav-link" to="/profilePasssenger">
+                                <DirectionsCarIcon />  Add a Ride
+                            </Link>
+                            {/* <a className="nav-link" href="#">Contact</a> */}
                         </li>
                         <br />
                         <li className="nav-item">

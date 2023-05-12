@@ -1,4 +1,4 @@
-import { Avatar, Button, CircularProgress, Typography } from '@mui/material';
+import { Avatar, Button, Card, CircularProgress, Typography } from '@mui/material';
 import React from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -40,7 +40,6 @@ function stringToColor(string) {
 export default function DrivererPublication() {
     const idd = JSON.parse(localStorage.getItem('idd'))
 
-    console.log(idd)
     const [isLoading, setLoading] = React.useState(true);
     const [pending, setPending] = React.useState(null);
     const [accept, setAccept] = React.useState(null);
@@ -93,7 +92,7 @@ export default function DrivererPublication() {
     return (
         <div>
             <div>
-                {/* <RideMap selectedPub={selectedPub} /> */}
+                <RideMap pub={selectedPub} />
             </div>
             {
                 (publication) ? (
@@ -115,54 +114,71 @@ export default function DrivererPublication() {
                             <tbody>
                                 {publication.map(pub =>
                                     <>
+                                        <Card sx={{ minWidth: 275, margin: '50px' }}>
 
-                                        <div class="history-items-container history-items-padding ">
-                                            <div class="history-item">
+                                            <div class="history-items-container history-items-padding ">
+                                                <div class="history-item">
 
 
-                                                {/* <div id="map1"></div> */}
+                                                {/* <RideMap pub={pub} /> */}
 
-                                                <div class="border-bottom-primary thin">
-                                                    <div class="status-container">
-                                                        <div class="date float-left">
-                                                            {moment(pub.dateDepart).calendar()}
-                                                        </div>
-                                                        <div class="status-none float-right text-uppercase">
-                                                            {pub.prix}DT
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="addresses-container position-relative">
-                                                    <div class="height-auto">
-                                                        <div class="w-100 map-input-container map-input-container-top">
-                                                            <span class="fas fa-location-arrow location-icon-rotate  map-input-icon"></span>
-                                                            <div class="map-input display-flex" style={{ height: '100px' }}>
-                                                                <input class="controls flex-1 font-weight-light" type="text"
-                                                                    placeholder="Enter an origin location" value={pub.lieuDepart} disabled />
+                                                    <div class="border-bottom-primary thin">
+                                                        <div class="status-container">
+                                                            <div class="date float-left">
+                                                                {moment(pub.dateDepart).calendar()}
                                                             </div>
+                                                            <div class="status-none float-right text-uppercase">
+                                                                {pub.prix}DT
+                                                            </div>
+                                                            <div class="clearfix"></div>
                                                         </div>
-                                                        <div class="href-decoration-none">
-                                                            <div class="w-100 map-input-container map-input-container-bottom">
-                                                                <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
-                                                                <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
-                                                                    {pub.lieuArrive}
+                                                    </div>
+
+                                                    <div class="addresses-container position-relative">
+                                                        <div class="height-auto">
+                                                            <div class="w-100 map-input-container map-input-container-top">
+                                                                <span class="fas fa-location-arrow location-icon-rotate  map-input-icon"></span>
+                                                                <div class="map-input display-flex" style={{ height: '100px' }}>
+                                                                    <input class="controls flex-1 font-weight-light" type="text"
+                                                                        placeholder="Enter an origin location" value={pub.lieuDepart} disabled />
                                                                 </div>
-                                                                <span class="dotted-line"></span>
+                                                            </div>
+                                                            <div class="href-decoration-none">
+                                                                <div class="w-100 map-input-container map-input-container-bottom">
+                                                                    <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
+                                                                    <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
+                                                                        {pub.lieuArrive}
+                                                                    </div>
+                                                                    <span class="dotted-line"></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div>
-                                                    <Link to='/editRide' state={{pub:pub }}>
-                                                        <Button variant='contained'>edit</Button>
-                                                    </Link>
-                                                    <Button onClick={handleDelete} variant='contained' > delete</Button>
-                                                    <Button onClick={() => setSelectedPub(pub)} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
+                                                    <div>
+                                                        <div>
+                                                            <div style={{
+                                                                float: 'right',
+                                                                background: 'blue',
+                                                                width: '25 %'
+                                                            }}>
+                                                                <Link to='/editRide' state={{ pub: pub }}>
+                                                                    <Button variant='contained'>edit</Button>
+                                                                </Link>
+                                                            </div>
+                                                            <div style={{ alignContent: 'flex-end' }}>
+                                                                <Button onClick={handleDelete} variant='contained' style={{ backgroundColor: 'red' }} > delete</Button>
+
+                                                            </div>
+                                                        </div>
+                                                        <div style={{ padding: '20px' }}>
+                                                            <Button href='#' onClick={() => setSelectedPub(pub)} style={{ color: 'white' }} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
+
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Card>
 
                                     </>
 

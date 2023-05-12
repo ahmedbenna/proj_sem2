@@ -1,11 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import background from './header.jpg'
+import logo from "./cover2.png"
 
 export default function HeaderGuest() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav style={{backgroundColor:'#003fba'}} className="navbar navbar-expand-lg navbar-light fixed-top">
             <div className="container">
-                <Link to="/"className="navbar-brand" >Covoi</Link>
+                <Link to="/"className="navbar-brand" >
+                <img src={logo} height={40} />
+
+                </Link>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

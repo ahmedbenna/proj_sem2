@@ -10,22 +10,24 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Avatar from './assets/ava.png'
-import DrivererPublication from './DrivererPublication';
-import back from './assets/images/back.svg'
+import PassengerDemand from './PassengerDemand';
+import loginImg from './assets/login.svg'
+import back from './assets/back.svg'
 
 
-export default function DriverProfile() {
-    const idd = JSON.parse(localStorage.getItem('idd'))
+
+export default function ProfilePasssenger() {
+    const idp = JSON.parse(localStorage.getItem('idp'))
 
     const [loading, setLoading] = React.useState(true);
-    const [driver, setDriver] = React.useState(null);
+    const [passenger, setPassenger] = React.useState(null);
     React.useEffect(() => {
         async function getClient() {
             try {
-                const response = await axios.get('/conducteur/' + idd);
+                const response = await axios.get('/passager/' + idp);
                 console.log(response);
-                setDriver(response.data);
-                console.log("ccccc", driver);
+                setPassenger(response.data);
+                console.log("ccccc", passenger);
                 setLoading(false);
             } catch (error) {
                 console.error("dfgfdfd", error);
@@ -33,14 +35,15 @@ export default function DriverProfile() {
         }
         getClient()
     }, [loading])
-    console.log('pppppp', driver)
+    console.log('pppppp', passenger)
     if (loading) {
 
         return <div ><CircularProgress /></div>
     }
     return (
         <div style={{ paddingTop: '100px', backgroundImage: `url(${back})`, minHeight: '800px' }}>
-            <div style={{}} class="container emp-profile" >
+
+            <div class="container emp-profile" >
                 <form method="post">
                     <div class="row">
                         <div class="col-md-4">
@@ -55,19 +58,18 @@ export default function DriverProfile() {
                         <div class="col-md-6">
                             <div class="profile-head">
                                 <h5>
-                                    {driver.prenom} {driver.nom}
+                                    {passenger.prenom} {passenger.nom}
                                 </h5>
-
+                                <Link to='/editPassengerProfile'>
+                                    <Button >Edit Profile </Button>
+                                </Link>
 
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Trips</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="demand-tab" data-toggle="tab" href="#demand" role="tab" aria-controls="demand" aria-selected="false">Demands</a>
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Contracts</a>
                                     </li>
                                 </ul>
                             </div>
@@ -99,7 +101,7 @@ export default function DriverProfile() {
                                             <label>First Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{driver.prenom} </p>
+                                            <p>{passenger.prenom} </p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -107,7 +109,7 @@ export default function DriverProfile() {
                                             <label>Last Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{driver.nom}</p>
+                                            <p>{passenger.nom}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -115,7 +117,7 @@ export default function DriverProfile() {
                                             <label>Email</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{driver.email}</p>
+                                            <p>{passenger.email}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -123,7 +125,7 @@ export default function DriverProfile() {
                                             <label>Phone</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{driver.telephone}</p>
+                                            <p>{passenger.telephone}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -131,28 +133,20 @@ export default function DriverProfile() {
                                             <label>Birthday</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{moment(driver.dateDeNaissance).format("dddd, MMMM Do YYYY")}</p>
+                                            <p>{moment(passenger.dateDeNaissance).format("dddd, MMMM Do YYYY")}</p>
                                         </div>
                                     </div>
-                                    <Link to='/editProfileDriver'>
-                                        <Button variant='outlined' style={{color:'gray'}} >Edit Profile </Button>
-                                    </Link>
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <Link to='/addRide'>
-                                        <Button variant='contained'> Add Ride</Button>
+                                    <Link to='/search'>
+                                        <Button> search a provider</Button>
                                     </Link>
-                                    <DrivererPublication />
-                                </div>
-                                <div class="tab-pane fade" id="demand" role="tabpanel" aria-labelledby="demand-tab">
-                                    {/* <Link to='/search'>
-                                    <Button> search a provider</Button>
-                                </Link> */}
-                                    <DrivererPublication />
+                                    <PassengerDemand />
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>

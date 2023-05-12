@@ -861,7 +861,7 @@ legend {
   transform: scale(1);
 }
 
-.s013 {
+.s0133 {
   min-height: 400px;
   display: -ms-flexbox;
   display: flex;
@@ -869,6 +869,7 @@ legend {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
+  /* background-color: #daf5ff; */
   /* background: url("../images/Searchs_013.png"); */
   background-size: cover;
   background-position: center center;
@@ -876,17 +877,17 @@ legend {
   font-family: 'Poppins', sans-serif;
 }
 
-.s013 form {
+.s0133 form {
   width: 100%;
   max-width: 914px;
   margin: 0;
 }
 
-.s013 form fieldset {
+.s0133 form fieldset {
   margin-bottom: 50px;
 }
 
-.s013 form fieldset legend {
+.s0133 form fieldset legend {
   font-size: 36px;
   font-weight: bold;
   color: #fff;
@@ -894,35 +895,35 @@ legend {
   text-align: center;
 }
 
-.s013 form .inner-form {
+.s0133 form .inner-form {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
 }
 
-.s013 form .inner-form .left {
+.s0133 form .inner-form .left {
   -ms-flex-positive: 1;
       flex-grow: 1;
   display: -ms-flexbox;
   display: flex;
 }
 
-.s013 form .inner-form .input-wrap {
+.s0133 form .inner-form .input-wrap {
   background: #fff;
   height: 80px;
   position: relative;
   padding: 20px 25px 20px 25px;
 }
 
-.s013 form .inner-form .input-wrap .input-field label {
+.s0133 form .inner-form .input-wrap .input-field label {
   font-size: 11px;
   font-weight: 500;
   display: block;
   color: #555;
 }
 
-.s013 form .inner-form .input-wrap .input-field input {
+.s0133 form .inner-form .input-wrap .input-field input {
   font-size: 16px;
   color: #333;
   background: transparent;
@@ -932,41 +933,41 @@ legend {
   padding: 8px 0;
 }
 
-.s013 form .inner-form .input-wrap .input-field input.placeholder {
+.s0133 form .inner-form .input-wrap .input-field input.placeholder {
   color: #808080;
 }
 
-.s013 form .inner-form .input-wrap .input-field input:-moz-placeholder {
+.s0133 form .inner-form .input-wrap .input-field input:-moz-placeholder {
   color: #808080;
 }
 
-.s013 form .inner-form .input-wrap .input-field input::-webkit-input-placeholder {
+.s0133 form .inner-form .input-wrap .input-field input::-webkit-input-placeholder {
   color: #808080;
 }
 
-.s013 form .inner-form .input-wrap .input-field input.hover, .s013 form .inner-form .input-wrap .input-field input:focus {
+.s0133 form .inner-form .input-wrap .input-field input.hover, .s0133 form .inner-form .input-wrap .input-field input:focus {
   box-shadow: none;
   outline: 0;
 }
 
-.s013 form .inner-form .input-wrap.first {
+.s0133 form .inner-form .input-wrap.first {
   -ms-flex-positive: 1;
       flex-grow: 1;
   border-radius: 3px 0 0 3px;
 }
 
-.s013 form .inner-form .input-wrap.second {
+.s0133 form .inner-form .input-wrap.second {
   min-width: 262px;
   border-radius: 0 3px 3px 0;
   border-left: 1px solid #e5e5e5;
 }
 
-.s013 form .input-select {
+.s0133 form .input-select {
   height: 34px;
   padding: 10px 0 6px 0;
 }
 
-.s013 form .choices__inner {
+.s0133 form .choices__inner {
   background: transparent;
   border-radius: 0;
   border: 0;
@@ -983,7 +984,7 @@ legend {
   font-family: 'Lato', sans-serif;
 }
 
-.s013 form .choices__inner .choices__list.choices__list--single {
+.s0133 form .choices__inner .choices__list.choices__list--single {
   display: -ms-flexbox;
   display: flex;
   padding: 0;
@@ -992,7 +993,7 @@ legend {
   height: 100%;
 }
 
-.s013 form .choices__inner .choices__item.choices__item--selectable.choices__placeholder {
+.s0133 form .choices__inner .choices__item.choices__item--selectable.choices__placeholder {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -1003,7 +1004,7 @@ legend {
   font-weight: 400;
 }
 
-.s013 form .choices__inner .choices__list--single .choices__item {
+.s0133 form .choices__inner .choices__list--single .choices__item {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -1011,7 +1012,7 @@ legend {
   height: 100%;
 }
 
-.s013 form .choices__list.choices__list--dropdown {
+.s0133 form .choices__list.choices__list--dropdown {
   border: 0;
   background: #fff;
   padding: 10px 15px;
@@ -1020,25 +1021,25 @@ legend {
   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 }
 
-.s013 form .choices__list.choices__list--dropdown .choices__item--selectable {
+.s0133 form .choices__list.choices__list--dropdown .choices__item--selectable {
   padding-right: 0;
 }
 
-.s013 form .choices__list--dropdown .choices__item--selectable.is-highlighted {
+.s0133 form .choices__list--dropdown .choices__item--selectable.is-highlighted {
   background: transparent;
   color: #333;
 }
 
-.s013 form .choices__list--dropdown .choices__item {
+.s0133 form .choices__list--dropdown .choices__item {
   color: #555;
   min-height: 24px;
 }
 
-.s013 form .choices[data-type*="select-one"] .choices__inner {
+.s0133 form .choices[data-type*="select-one"] .choices__inner {
   padding-bottom: 0;
 }
 
-/* .s013 form .choices[data-type*="select-one"]:after {
+/* .s0133 form .choices[data-type*="select-one"]:after {
   border: 0;
   width: 18px;
   height: 18px;
@@ -1053,15 +1054,15 @@ legend {
   background-repeat: no-repeat;
 } */
 
-/* .s013 form .choices[data-type*="select-one"].is-open:after {
+/* .s0133 form .choices[data-type*="select-one"].is-open:after {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg fill='%23999' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3e%3cpath d='M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z'/%3e%3c/svg%3e");
 } */
 
-.s013 form .btn-search {
+.s0133 form .btn-search {
   min-width: 110px;
   height: 80px;
   padding: 0 15px;
-  background: #fa4251;
+  background: #13568B;
   white-space: nowrap;
   border-radius: 3px;
   font-size: 16px;
@@ -1074,21 +1075,21 @@ legend {
   margin-left: 10px;
 }
 
-.s013 form .btn-search:hover {
-  background: #f9293a;
+.s0133 form .btn-search:hover {
+  background: #3FCEA8;
 }
 
 @media screen and (max-width: 767px) {
-  .s013 form .inner-form {
+  .s0133 form .inner-form {
     display: block;
   }
-  .s013 form .inner-form .left {
+  .s0133 form .inner-form .left {
     display: block;
   }
-  .s013 form .inner-form .left .input-wrap {
+  .s0133 form .inner-form .left .input-wrap {
     margin-bottom: 15px;
   }
-  .s013 form .btn-search {
+  .s0133 form .btn-search {
     margin: 0;
     width: 100%;
   }

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import background from './header.jpg'
 
 import Context from "../../context";
 import axios from "axios";
@@ -8,6 +9,7 @@ import Loading from "./Loading";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button, CircularProgress } from "@mui/material";
+import logo from "./cover2.png"
 
 const HeaderPassenger = () => {
   const [passager, setPassager] = useState();
@@ -39,7 +41,7 @@ const HeaderPassenger = () => {
         setIsloading(false)
 
         console.log('ppppppp', response.data)
-  
+
       } catch (error) {
         console.error(error);
         localStorage.removeItem('idp')
@@ -55,9 +57,9 @@ const HeaderPassenger = () => {
     // const isLogout = window.confirm("Do you want to log out ?");
     // if (isLogout) {
 
-      removeAuthedInfo();
-      window.location = '/'
-      // }
+    removeAuthedInfo();
+    window.location = '/'
+    // }
   };
 
   // console.error('aaa')
@@ -69,20 +71,21 @@ const HeaderPassenger = () => {
   if (isLoading) {
 
     return <div className="App"><CircularProgress /></div>;
-}
+  }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div className="container">
-  
-      <Link to="/"className="navbar-brand" >Covoi</Link>
+    <nav style={{ backgroundColor: '#003fba' }} className=" text-white navbar navbar-expand-lg navbar-light fixed-top">
+      <div className="container" >
+        <Link to="/" >
+          <img src={logo} height={40} />
+        </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item active">
-            <Link to="/" className="nav-link" >Home</Link>
+              <Link to="/" className="nav-link" >Home</Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">About</a>
@@ -91,14 +94,17 @@ const HeaderPassenger = () => {
               <a className="nav-link" href="#">Services</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Contact</a>
+            <Link className="nav-link" to="/profilePasssenger">
+              <AccountCircleIcon />  Add a Ride 
+            </Link>
+              {/* <a className="nav-link" href="#">Contact</a> */}
             </li>
-            <br/>
+            <br />
             <li className="nav-item">
-              <Link className="nav-link" to="/passengerProfile"><AccountCircleIcon/>  {passager.prenom} {passager.nom} </Link>
+              <Link className="nav-link" to="/profilePasssenger"><AccountCircleIcon />  {passager.prenom} {passager.nom} </Link>
             </li>
             <li className="nav-item">
-              <Button color="secondary"  className="nav-link" onClick={logout}><LogoutIcon/> LOGOUT </Button>
+              <Button color="secondary" className="nav-link" onClick={logout}><LogoutIcon /> LOGOUT </Button>
             </li>
           </ul>
         </div>

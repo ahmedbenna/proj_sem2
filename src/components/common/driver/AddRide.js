@@ -228,7 +228,7 @@ export default function AddRide() {
                                             </g>
                                         </svg>
                                     </div>
-                                    <p className="search__result-label">{result.label}</p>
+                                    <p style={{color:'black'}} className="search__result-label">{result.label}</p>
                                 </div>
                             ))}
                     </div>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react'
 
 import "./css/main.css"
-import landingimg from "./images/landing.jpg"
+// import landingimg from "./images/carSharing"
 import { Link } from 'react-router-dom';
 // import './assets/css/templatemo-woox-travel.css';
 // import './assets/css/owl.css';
@@ -61,10 +61,12 @@ export default function Landing() {
         }
     }
     return (
-        <div className="s013" style={{ backgroundImage: `url(${landingimg})` }}>
-            <form style={{ marginTop:'250px'}}>
-                <fieldset>
-                    <legend style={{color : 'black'}}>QUICK FIND YOUR TRIP</legend>
+        <div className="s013" >
+            <form style={{ marginTop: '250px' }}>
+                <fieldset style={{  textShadow: '2px 2px 2px #000000'}}>
+                    <div >
+                        <legend style={{ color: '#ffffff' }}>QUICK FIND YOUR TRIP</legend>
+                    </div>
                 </fieldset>
                 <div className="inner-form" style={{ padding: '10px', backgroundColor: '#232223' }}>
                     <div className="left" >
@@ -81,7 +83,7 @@ export default function Landing() {
                             </div>
                         </div>
                     </div>
-                    <Link to='/search' state={{ from: ' from, destination: destination ' }}>
+                    <Link to='/search' state={{ from: from, destination: destination }}>
                         <button className="btn-search" type="button">SEARCH</button>
                     </Link>
                 </div>

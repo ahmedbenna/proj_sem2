@@ -1,4 +1,4 @@
-import { Avatar, Button, CircularProgress, Typography } from '@mui/material';
+import { Avatar, Button, Card, CircularProgress, Divider, Typography } from '@mui/material';
 import React from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -8,6 +8,8 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import moment from 'moment';
+import DriveEtaIcon from '@mui/icons-material/DriveEta';
+import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
 // import RideMap from '../RideMap';
 //avatar____________________________
 import "../common/driver/assets/css/bootstrap.min.css"
@@ -16,7 +18,8 @@ import "../common/driver/assets/css/styles.css"
 // import Home from '../../home/Home';
 import { useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-
+import DemandRide from './DemandRide';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 function stringToColor(string) {
     let hash = 0;
     let i;
@@ -92,50 +95,71 @@ export default function DrivererPublication(props) {
     //     return <div className="App"><CircularProgress /></div>;
     // }
     return (
-        <div>
-            <div class="history-items-container history-items-padding ">
-                <div class="history-item">
+        <Card sx={{ minWidth: 275, margin: '50px' }}>
+            <div style={{ padding: '50px' }}>
+                <div class="history-items-container history-items-padding ">
+                    <div class="history-item">
 
 
-                    {/* <div id="map1"></div> */}
+                        {/* <div id="map1"></div> */}
 
-                    <div class="border-bottom-primary thin">
-                        <div class="status-container">
-                            <div class="date float-left">
-                                {moment(props.pub.dateDepart).calendar()}
-                            </div>
-                            <div class="status-none float-right text-uppercase">
-                                {props.pub.prix}DT
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-
-                    <div class="addresses-container position-relative">
-                        <div class="height-auto">
-                            <div class="w-100 map-input-container map-input-container-top">
-                                <span class="fas fa-location-arrow location-icon-rotate  map-input-icon"></span>
-                                <div class="map-input display-flex" style={{ height: '100px' }}>
-                                    <input class="controls flex-1 font-weight-light" type="text"
-                                        placeholder="Enter an origin location" value={props.pub.lieuDepart} disabled />
+                        <div class="border-bottom-primary thin">
+                            <div class="status-container">
+                                <div class="date float-left">
+                                    {moment(props.pub.dateDepart).calendar()}
                                 </div>
+                                <div class="status-none float-right text-uppercase">
+                                    {props.pub.prix}DT
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="href-decoration-none">
-                                <div class="w-100 map-input-container map-input-container-bottom">
-                                    <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
-                                    <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
-                                        {props.pub.lieuArrive}
+                        </div>
+
+                        <div class="addresses-container position-relative">
+                            <div class="height-auto">
+                                <div class="w-100 map-input-container map-input-container-top">
+                                    <span class="fas fa-location-arrow location-icon-rotate  map-input-icon"></span>
+                                    <div class="map-input display-flex" style={{ height: '100px' }}>
+                                        <input class="controls flex-1 font-weight-light" type="text"
+                                            placeholder="Enter an origin location" value={props.pub.lieuDepart} disabled />
                                     </div>
-                                    <span class="dotted-line"></span>
+                                </div>
+                                <div class="href-decoration-none">
+                                    <div class="w-100 map-input-container map-input-container-bottom">
+                                        <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
+                                        <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
+                                            {props.pub.lieuArrive}
+                                        </div>
+                                        <span class="dotted-line"></span>
+                                        {/* <Typography>{props.pub.conducteur.prenom}{props.pub.conducteur.nom}</Typography> */}
+
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <Divider />
+                        <div style={{ padding: '5px' }}>
+                            <Typography variant='h6'> <DriveEtaIcon /> Driver: {props.pub.conducteur.prenom} {props.pub.conducteur.nom}</Typography>
+                        </div>
+                        <div style={{ padding: '5px' }}>
+                            <Typography variant='body2' style={{ color: 'black' }} > <AirlineSeatReclineNormalIcon /> Available Seats: {props.pub.nbrePlace}</Typography>
+
+                            <Divider />
+
+
+
+                        </div>
+                        <div style={{ padding: '5px' }}>
+
+                            <Typography variant='body2' style={{ color: 'black' }}><EditNoteIcon/> Description: {props.pub.description}</Typography>
+                        </div>
+                        <DemandRide pub={props.pub} />
                     </div>
-                   
                 </div>
+
+
             </div>
-
-
-        </div>
+        </Card>
     )
 }

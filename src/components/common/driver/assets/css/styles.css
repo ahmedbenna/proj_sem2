@@ -477,7 +477,7 @@ input[type="radio"].radio-wide:before {
 .scan-your-card-container .btn-save a,
 .scan-your-card-container-none .btn-save a {
   height: 60px;
-  color: black;
+  color: rgb(255, 255, 255);
   font-weight: 300;
   width: 100%;
 }
@@ -689,8 +689,8 @@ input[type="radio"].radio-wide:before {
 }
 .payment-options-list:hover {
   color: #FFFFFF !important;
-  background-color: #FFD300;
-  border-color: #FFD300;
+  background-color: #363768;
+  border-color: #363768;
 }
 .payment-options-list:hover .visible-icon {
   display: none;
@@ -968,8 +968,8 @@ input[type="radio"].radio-wide:before {
   border: 2px solid #989898;
 }
 .change-request-status input:checked + .slider {
-  background-color: #FFD300;
-  border: 2px solid #FFD300;
+  background-color: #363768;
+  border: 2px solid #363768;
 }
 .all-support-team-messages {
   margin: 8px 32px 16px 16px;
@@ -1262,8 +1262,8 @@ input[type="radio"].radio-wide:before {
   box-shadow: 2px 2px 4px 1px #c5c5c5ad;
 }
 input:checked + .slider {
-  background-color: #FFD300;
-  border: 2px solid #FFD300;
+  background-color: #363768;
+  border: 2px solid #363768;
 }
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
@@ -1395,7 +1395,7 @@ input:checked + .slider:before {
 }
 .ride-options-bottom .cars-options .car-option.active {
   padding-bottom: 8px;
-  border-bottom: 5px solid #FFD300;
+  border-bottom: 5px solid #363768;
 }
 .ride-options-bottom .about-section-title {
   color: #777777;
@@ -1499,11 +1499,11 @@ input:checked + .slider:before {
   color: #FFFFFF;
 }
 .approved-icon.call {
-  background: #FFD300;
+  background: #363768;
 }
 .approved-icon.call:focus {
-  background: #FFD300 !important;
-  border-color: #FFD300 !important;
+  background: #363768 !important;
+  border-color: #363768 !important;
 }
 .approved-icon.call span {
   transform: rotate(90deg);
@@ -1540,7 +1540,7 @@ input:checked + .slider:before {
   color: #FFFFFF;
 }
 .approved-icon.call {
-  background: #FFD300;
+  background: #363768;
 }
 .approved-icon.call.in-process {
   background: #FF0000;
@@ -1640,7 +1640,7 @@ input:checked + .slider:before {
 .tapped-car-info .tapped-car-info-container {
   margin: 0 16px;
   padding: 8px 16px 0 24px;
-  background: linear-gradient(to bottom, #FFD300 50%, #fff 50%);
+  background: linear-gradient(to bottom, #363768 50%, #fff 50%);
   height: 265px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -1683,7 +1683,7 @@ input:checked + .slider:before {
   font-size: 15px;
   text-transform: uppercase;
   padding: 1px 24px;
-  border: 1px solid black;
+  border: 1px solid rgb(255, 255, 255);
   background: none;
   height: 100%;
   box-shadow: 3px 4px 6px 0px #00000012;
@@ -1886,7 +1886,7 @@ input:checked + .slider:before {
   margin-top: 16px;
 }
 .request-notification-container.map-notification-warning {
-  border-left: 4px solid #FFD300;
+  border-left: 4px solid #363768;
 }
 .request-notification-container .direction-icon {
   height: 17px;
@@ -1908,11 +1908,11 @@ input:checked + .slider:before {
   outline: none;
 }
 .comment-info .comment-label {
-  color: #FFD300;
+  color: #363768;
 }
 .comment-info .btn-primary {
   height: 60px;
-  color: black;
+  color: rgb(255, 255, 255);
   font-weight: 300;
   width: 100%;
   font-size: 18px;
@@ -2082,7 +2082,7 @@ input:checked + .slider:before {
 }
 .chat-container .right-align-message .message-content {
   border-bottom-left-radius: 0px;
-  background-color: #FFD300;
+  background-color: #363768;
 }
 .chat-container .right-align-message .message-content.dots {
   letter-spacing: 6px;
@@ -2148,7 +2148,7 @@ input:checked + .slider:before {
   padding: 24px 8px;
 }
 #searchingModal .search .fa-spinner {
-  color: #FFD300;
+  color: #363768;
   margin-bottom: 12px;
   font-size: 24px;
 }
@@ -2289,7 +2289,7 @@ a[href^="https://maps.google.com/maps"] {
 .request-ride-btn button,
 .go-to-pickup-btn button {
   width: 100%;
-  color: black;
+  color: rgb(255, 255, 255);
   height: 60px;
   font-weight: 300;
   font-size: 18px;
@@ -2320,8 +2320,8 @@ a[href^="https://maps.google.com/maps"] {
   border-radius: 4px;
 }
 .btn-primary {
-  background-color: #FFD300;
-  border: 1px solid #FFD300;
+  background-color: #363768;
+  border: 1px solid #363768;
   font-weight: 400;
   box-shadow: 3px 4px 6px 0px #00000024;
   height: 60px;
@@ -2358,11 +2358,11 @@ a[href^="https://maps.google.com/maps"] {
   color: #FFFFFF !important;
 }
 .btn-transparent-primary {
-  color: #000000 !important;
+  color: #ffffff !important;
 }
 .btn-transparent-primary:hover {
-  background-color: #FFD300 !important;
-  border-color: #FFD300;
+  background-color: #363768 !important;
+  border-color: #363768;
 }
 .btn-secondary {
   background-color: #3B5998;
@@ -2435,7 +2435,7 @@ button:hover,
   color: #3389FF;
 }
 .main-background {
-  background-color: #FFD300;
+  background-color: #363768;
 }
 .light-gray {
   color: #B1B1B1;
@@ -2447,10 +2447,10 @@ button:hover,
   color: #00D310 !important;
 }
 .primary-color {
-  color: #FFD300 !important;
+  color: #363768 !important;
 }
 .primary-background {
-  background: #FFD300;
+  background: #363768;
 }
 .grey-label {
   color: #707070;
@@ -2598,7 +2598,7 @@ button:hover,
   margin-bottom: 16px;
 }
 .fas.fa-star {
-  color: #FFD300;
+  color: #363768;
 }
 .fas.fa-star:hover {
   cursor: pointer;

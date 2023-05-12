@@ -863,13 +863,14 @@ legend {
 
 .s013 {
   min-height: 100vh;
+  height: 200px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
-  /* background: url("../images/Searchs_013.png"); */
+  background: url("../images/carSharing.svg");
   background-size: cover;
   background-position: center center;
   padding: 15px;
@@ -1061,7 +1062,7 @@ legend {
   min-width: 110px;
   height: 80px;
   padding: 0 15px;
-  background: #fa4251;
+  background: #13568B;
   white-space: nowrap;
   border-radius: 3px;
   font-size: 16px;
@@ -1075,7 +1076,7 @@ legend {
 }
 
 .s013 form .btn-search:hover {
-  background: #f9293a;
+  background: #3FCEA8;
 }
 
 @media screen and (max-width: 767px) {

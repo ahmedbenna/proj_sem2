@@ -30,13 +30,13 @@ import Footer from "./components/common/Footer";
 import Search from "./components/home/Search";
 import SignUpDriver from "./components/register/SignUpDriver";
 import SignUpPassenger from "./components/register/SignUpPassenger";
-import PassengerProfile from "./components/passenger/PassengerProfile";
+import ProfilePasssenger from "./components/passenger/ProfilePasssenger";
 import EditPassengerProfile from "./components/passenger/EditPassengerProfile";
 import AddRide from "./components/common/driver/AddRide";
 import DriverProfile from "./components/common/driver/DriverProfile";
 import EditProfileDriver from "./components/common/driver/EditProfileDriver";
 import EditRide from "./components/common/driver/EditRide";
-import DemandRide from "./components/common/DemandRide";
+import RideMap from "./components/common/RideMap";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -52,27 +52,27 @@ function App() {
 
   const lookingDriverMaxTime = 30000;
 
-  const context = {
-    user,
-    setUser,
-    // cometChat,
-    // setCometChat,
-    selectedFrom,
-    setSelectedFrom,
-    selectedTo,
-    setSelectedTo,
-    rideRequest,
-    setRideRequest,
-    currentRide,
-    setCurrentRide,
-  };
+  // const context = {
+  //   user,
+  //   setUser,
+  //   // cometChat,
+  //   // setCometChat,
+  //   selectedFrom,
+  //   setSelectedFrom,
+  //   selectedTo,
+  //   setSelectedTo,
+  //   rideRequest,
+  //   setRideRequest,
+  //   currentRide,
+  //   setCurrentRide,
+  // };
 
-  const initAuthUser = () => {
-    const authenticatedUser = localStorage.getItem("token");
-    if (authenticatedUser) {
-      // setUser(JSON.parse(authenticatedUser));
-    }
-  };
+  // const initAuthUser = () => {
+  //   const authenticatedUser = localStorage.getItem("token");
+  //   if (authenticatedUser) {
+  //     // setUser(JSON.parse(authenticatedUser));
+  //   }
+  // };
 
   // const initCometChat = async () => {
   //   const { CometChat } = await import("@cometchat-pro/chat");
@@ -90,37 +90,37 @@ function App() {
   //   );
   // };
 
-  const initCurrentRide = () => {
-    const currentRide = localStorage.getItem("currentRide");
-    if (currentRide) {
-      const parsedCurrentRide = JSON.parse(currentRide);
-      setCurrentRide(parsedCurrentRide);
-      setSelectedFrom(parsedCurrentRide.pickup);
-      setSelectedTo(parsedCurrentRide.destination);
-    }
-  };
+  // const initCurrentRide = () => {
+  //   const currentRide = localStorage.getItem("currentRide");
+  //   if (currentRide) {
+  //     const parsedCurrentRide = JSON.parse(currentRide);
+  //     setCurrentRide(parsedCurrentRide);
+  //     setSelectedFrom(parsedCurrentRide.pickup);
+  //     setSelectedTo(parsedCurrentRide.destination);
+  //   }
+  // };
 
-  useEffect(() => {
-    initAuthUser();
-    // initCometChat();
-    initCurrentRide();
-  }, []);
+  // useEffect(() => {
+  //   initAuthUser();
+  //   // initCometChat();
+  //   initCurrentRide();
+  // }, []);
 
-  const onCreatedRideRefUpdated = useCallback(
-    (updatedRide) => {
-      if (
-        updatedRide?.rideUuid === rideRequest.rideUuid &&
-        updatedRide?.driver
-      ) {
-        uiService.hideLoading();
-        clearTimeout(lookingDriverTimeout.current);
-        setRideRequest(null);
-        localStorage.setItem("currentRide", JSON.stringify(updatedRide));
-        setCurrentRide(updatedRide);
-      }
-    },
-    [rideRequest]
-  );
+  // const onCreatedRideRefUpdated = useCallback(
+  //   (updatedRide) => {
+  //     if (
+  //       updatedRide?.rideUuid === rideRequest.rideUuid &&
+  //       updatedRide?.driver
+  //     ) {
+  //       uiService.hideLoading();
+  //       clearTimeout(lookingDriverTimeout.current);
+  //       setRideRequest(null);
+  //       localStorage.setItem("currentRide", JSON.stringify(updatedRide));
+  //       setCurrentRide(updatedRide);
+  //     }
+  //   },
+  //   [rideRequest]
+  // );
 
   useEffect(() => {
     // if (rideRequest) {
@@ -144,20 +144,20 @@ function App() {
     // rideRequest, onCreatedRideRefUpdated
   ]);
 
-  const onCurrentRideRefUpdated = useCallback(
-    (updatedRide) => {
-      if (
-        updatedRide?.rideUuid === currentRide.rideUuid &&
-        updatedRide?.driver &&
-        (updatedRide?.status === "canceled" || updatedRide?.status === "done")
-      ) {
-        localStorage.removeItem("currentRide");
-        setCurrentRide(null);
-        window.location.reload();
-      }
-    },
-    [currentRide]
-  );
+  // const onCurrentRideRefUpdated = useCallback(
+  //   (updatedRide) => {
+  //     if (
+  //       updatedRide?.rideUuid === currentRide.rideUuid &&
+  //       updatedRide?.driver &&
+  //       (updatedRide?.status === "canceled" || updatedRide?.status === "done")
+  //     ) {
+  //       localStorage.removeItem("currentRide");
+  //       setCurrentRide(null);
+  //       window.location.reload();
+  //     }
+  //   },
+  //   [currentRide]
+  // );
 
   useEffect(() => {
     // if (currentRide) {
@@ -174,8 +174,8 @@ function App() {
   ]);
 
   return (
-    <Context.Provider value={context}>
-
+    // <Context.Provider value={context}>
+    <>
       <Router>
         <Header />
         <Switch>
@@ -184,7 +184,7 @@ function App() {
 
           <PrivateRoute exact path="/Home" component={Home} />
 
-          
+
 
           <Route exact path="/loginPaasenger">
             <LoginPassenger />
@@ -192,9 +192,9 @@ function App() {
           <Route exact path="/loginDriver">
             <LoginDriver />
           </Route>
-          <Route exact path="/passengerProfile ">
+          {/* <Route exact path="/passengerProfile ">
             <PassengerProfile />
-          </Route>
+          </Route> */}
           {/* <Route exact path="/driverProfile ">
             <DriverProfile />
           </Route> */}
@@ -219,22 +219,25 @@ function App() {
           <Route exact path="/editRide">
             <EditRide />
           </Route>
+
           
-          <Route exact path="/demandRide">
-            <DemandRide />
+          <Route exact path="/profilePasssenger">
+            <ProfilePasssenger />
           </Route>
-          
-          {/* <Route path='/passengerProfile' element={<PassengerProfile />} /> */}
+          {/* <Route path='/profilePasssenger' element={<ProfilePasssenger />} /> */}
 
           {/* <Route exact path="*">
             <Redirect to="/" />
           </Route> */}
         </Switch>
-        <Footer/>
+        <Footer />
         {/* <DriverProfile /> */}
+        {/* <RideMap/> */}
       </Router>
       <Loading />
-    </Context.Provider>
+    </>
+
+    // </Context.Provider>
   );
 }
 
