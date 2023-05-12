@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import "./css/main.css"
 // import landingimg from "./images/carSharing"
 import { Link } from 'react-router-dom';
+import RidsList from './RidsList';
 // import './assets/css/templatemo-woox-travel.css';
 // import './assets/css/owl.css';
 // import './assets/css/animate.css';
@@ -61,6 +62,9 @@ export default function Landing() {
         }
     }
     return (
+        <div>
+
+        
         <div className="s013" >
             <form style={{ marginTop: '250px' }}>
                 <fieldset style={{  textShadow: '2px 2px 2px #000000'}}>
@@ -89,6 +93,8 @@ export default function Landing() {
                 </div>
             </form>
 
+        </div>
+        <RidsList/>
         </div>
     )
 }

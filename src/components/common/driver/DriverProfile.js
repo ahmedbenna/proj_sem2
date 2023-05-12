@@ -12,6 +12,7 @@ import moment from 'moment';
 import Avatar from './assets/ava.png'
 import DrivererPublication from './DrivererPublication';
 import back from './assets/images/back.svg'
+import DemandList from './DemandList';
 
 
 export default function DriverProfile() {
@@ -148,7 +149,7 @@ export default function DriverProfile() {
                                     {/* <Link to='/search'>
                                     <Button> search a provider</Button>
                                 </Link> */}
-                                    <DrivererPublication />
+                                    <DemandList />
                                 </div>
                             </div>
                         </div>

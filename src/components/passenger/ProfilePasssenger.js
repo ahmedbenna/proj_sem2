@@ -139,7 +139,7 @@ export default function ProfilePasssenger() {
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <Link to='/search'>
-                                        <Button> search a provider</Button>
+                                        <Button> Search a Ride</Button>
                                     </Link>
                                     <PassengerDemand />
                                 </div>
