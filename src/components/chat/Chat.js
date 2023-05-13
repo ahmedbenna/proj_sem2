@@ -3,7 +3,25 @@ import { CometChatMessages } from "../../cometchat-pro-react-ui-kit/CometChatWor
 
 import Context from "../../context";
 
-const Chat = () => {
+import { CometChat } from '@cometchat-pro/chat';
+
+
+const appID = process.env.REACT_APP_COMETCHAT_APP_ID;
+const region = process.env.REACT_APP_COMETCHAT_REGION;
+const appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion
+  (region).build();
+
+CometChat.init(appID, appSetting).then(
+  () => {
+    console.log("Initialization completed sucessfully");
+  },
+  error => {
+    console.log("Initialization failed with error:", error);
+  }
+)
+
+
+const Chat = (props) => {
   const { user, currentRide } = useContext(Context);
 
   const findUser = () => {

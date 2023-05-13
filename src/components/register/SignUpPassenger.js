@@ -16,68 +16,69 @@ import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import moment from 'moment/moment';
 import { useFormik } from 'formik';
 import * as yup from "yup";
+import { CometChat } from '@cometchat-pro/chat';
 // import GoogleLogin from 'react-google-login';
 
 const theme = createTheme();
 
 export default function SignUpPassenger() {
   const [formData, setformData] = React.useState()
-  const [isLoading, setLoading] = React.useState(true);
-//   const [citys, setCitys] = React.useState();
+  const [isLoading, setLoading] = React.useState(false);
+  const [err, setErr] = React.useState(false)
   const [minDate, setMinDate] = React.useState(moment(new Date()))
 
 
-//   async function signup() {
-//     try {
-//       const response = await axios.post('http://localhost:8088/client/signup', formData);
-//       console.log(response);
-//       localStorage.setItem('idc', JSON.stringify({ "id": response.data.id }))
-//       window.location.replace("/")
-//     } catch (error) {
+  //   async function signup() {
+  //     try {
+  //       const response = await axios.post('http://localhost:8088/client/signup', formData);
+  //       console.log(response);
+  //       localStorage.setItem('idc', JSON.stringify({ "id": response.data.id }))
+  //       window.location.replace("/")
+  //     } catch (error) {
 
-//       console.error(error);
-//     }
-//   }
-
-
-
-
-
-//   React.useEffect(() => {
-
-    // async function getCity() {
-    //   try {
-    //     const response = await axios.get('http://localhost:8088/city/getAllCity');
-    //     console.log(response);
-    //     setCitys(response.data);
-    //     console.log("ccccc", citys);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
-
-    //   getSpeciality = () => {
-    //     axios
-    //         .get("http://localhost:8088/speciality/getAllSpeciality")
-    //         .then(data => {
-    //             this.setState({ specialitys: data.data })
-    //             console.log(data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //             return null;
-    //         });
-    // };
+  //       console.error(error);
+  //     }
+  //   }
 
 
 
 
 
-    // getCity();
-    // console.log("city", citys)
-//     console.log("sdf", moment(minDate).subtract(2, 'days').format("YYYY-MM-DD"))
-//   }, [isLoading]);
+  //   React.useEffect(() => {
+
+  // async function getCity() {
+  //   try {
+  //     const response = await axios.get('http://localhost:8088/city/getAllCity');
+  //     console.log(response);
+  //     setCitys(response.data);
+  //     console.log("ccccc", citys);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  //   getSpeciality = () => {
+  //     axios
+  //         .get("http://localhost:8088/speciality/getAllSpeciality")
+  //         .then(data => {
+  //             this.setState({ specialitys: data.data })
+  //             console.log(data)
+  //         })
+  //         .catch(err => {
+  //             console.log(err);
+  //             return null;
+  //         });
+  // };
+
+
+
+
+
+  // getCity();
+  // console.log("city", citys)
+  //     console.log("sdf", moment(minDate).subtract(2, 'days').format("YYYY-MM-DD"))
+  //   }, [isLoading]);
 
 
   const minnDate = moment(new Date()).subtract(18, 'years')._d
@@ -111,12 +112,14 @@ export default function SignUpPassenger() {
       email: "",
       password: "",
       cPassword: "",
-    //   street: "",
+      //   street: "",
       phone: "",
-    //   city: 1,
+      //   city: 1,
       birthday: moment(minDate).subtract(18, 'years').format("YYYY-MM-DD")
     },
     onSubmit: (values) => {
+      setLoading(true)
+      setErr(false)
       console.log("subbbb", values)
       setformData({
         email: values.email,
@@ -146,12 +149,30 @@ export default function SignUpPassenger() {
       })
         .then(response => {
           console.log(response);
-          localStorage.setItem('idp', JSON.stringify(response.data.id ))
-          window.location.replace("/")
+          localStorage.setItem('idp', JSON.stringify(response.data.id))
+
+          const authKey = process.env.REACT_APP_COMETCHAT_AUTH_KEY;
+          const uid = String(response.data.id)+'p'
+          const name = response.data.prenom.concat(" ", response.data.nom)
+          var user = new CometChat.User(uid);
+          user.setName(name);
+          user.setRole('p')
+
+          CometChat.createUser(user, authKey).then(
+            user => {
+              console.log("user created", user);
+              setLoading(false)
+              window.location.replace("/")
+            }, error => {
+              setErr(true)
+              console.log("error creating user", error);
+            })
+          // window.location.replace("/")
         })
 
         .catch(error => {
-          console.error("dfgbh",error);
+          setErr(true)
+          console.error("dfgbh", error);
         })
 
 
@@ -167,10 +188,10 @@ export default function SignUpPassenger() {
   }
 
 
-//   if (isLoading) {
+  //   if (isLoading) {
 
-//     return <div className="App"><CircularProgress /></div>;
-//   }
+  //     return <div className="App"><CircularProgress /></div>;
+  //   }
 
   return (
     // <React.Suspense fallback={}>
@@ -340,15 +361,29 @@ export default function SignUpPassenger() {
                   // defaultValue={moment(minDate).subtract(18, 'years').format("YYYY-MM-DD")}
                   />
                 </Grid>
+                {(err) ? (
+                  <Grid item xs={12}>
+                    <Typography color={'red'}> Email or Password is not valid</Typography>
+                  </Grid>
+                ) : ('')}
+                <Grid item xs={12}>
+                  <>
+                    {(isLoading) ? (
+                      <CircularProgress />
+                    ) : (
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                      >
+                        Sign Up
+                      </Button>
+                    )}
+                  </>
+                </Grid>
               </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
-              </Button>
+
               {/* <GoogleLogin
                 clientId="109524746643-mf2lf4u0s5a8vbtdl8d2ffbp41aa9b19.apps.googleusercontent.com"
                 buttonText="Login"

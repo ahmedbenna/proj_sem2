@@ -16,6 +16,8 @@ import { Link, Navigate, Redirect } from 'react-router-dom'
 import { Formik } from 'formik';
 import * as yup from "yup";
 import axios from 'axios';
+import { CometChat } from '@cometchat-pro/chat';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -25,6 +27,7 @@ export default function LoginDriver() {
 
   const [formData, setformData] = React.useState()
   const [err, setErr] = React.useState(false)
+  const [isLoading, setLoading] = React.useState(false);
 
   async function auth() {
     try {
@@ -75,6 +78,7 @@ export default function LoginDriver() {
             }}
             onSubmit={async (values) => {
               setErr(false)
+              setLoading(true)
               setformData({
                 email: values.email,
                 password: values.password,
@@ -86,7 +90,23 @@ export default function LoginDriver() {
                 .then(response => {
                   console.log(response)
                   localStorage.setItem('idd', JSON.stringify(response.data.id))
-                  window.location.replace("/")
+                  const authKey = process.env.REACT_APP_COMETCHAT_AUTH_KEY;
+                  const uid = String(response.data.id) + 'd'
+
+                  CometChat.login(uid, authKey).then(
+                    user => {
+                      console.log("User logged in successfully", { user });
+                      setLoading(false)
+                      window.location.replace("/")
+                    },
+                    error => {
+                      setErr(true)
+                      console.log("Login ailed", { error });
+                    }
+                  )
+
+
+                  // 
                 })
                 .catch(error => {
                   console.error(error)
@@ -128,17 +148,29 @@ export default function LoginDriver() {
                   helperText={props.touched.password && props.errors.password}
                   autoComplete="current-password"
                 />
-                {(err) ? (<Typography color={'red'}> Email or Password is not valid</Typography>
+
+
+                {(err) ? (
+
+                  <Typography color={'red'}> Email or Phone Exist!!</Typography>
+
                 ) : ('')}
 
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
+                <>
+                  {(isLoading) ? (
+                    <CircularProgress />
+                  ) : (
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                    >
+                      Sign In
+                    </Button>
+                  )}
+                </>
+
                 <Grid container>
 
                   <Grid item>

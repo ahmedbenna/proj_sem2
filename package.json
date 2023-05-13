@@ -23,6 +23,7 @@
     "leaflet-routing-machine": "^3.2.12",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "@cometchat-pro/chat": "3.0.11",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
     "react-map-gl": "^7.0.23",

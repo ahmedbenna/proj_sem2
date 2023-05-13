@@ -16,6 +16,8 @@ import { Link, Navigate, Redirect } from 'react-router-dom'
 import { Formik } from 'formik';
 import * as yup from "yup";
 import axios from 'axios';
+import { CircularProgress } from '@mui/material';
+import { CometChat } from '@cometchat-pro/chat';
 
 
 
@@ -25,6 +27,7 @@ export default function LoginPassenger() {
 
   const [formData, setformData] = React.useState()
   const [err, setErr] = React.useState(false)
+  const [isLoading, setLoading] = React.useState(false);
 
 
   async function auth() {
@@ -78,6 +81,7 @@ export default function LoginPassenger() {
             }}
             onSubmit={async (values) => {
               setErr(false)
+              setLoading(true)
 
               setformData({
                 email: values.email,
@@ -90,7 +94,21 @@ export default function LoginPassenger() {
                 .then(response => {
                   console.log(response)
                   localStorage.setItem('idp', JSON.stringify(response.data.id))
-                  window.location.replace("/")
+                  const authKey = process.env.REACT_APP_COMETCHAT_AUTH_KEY;
+                  const uid = String(response.data.id) + 'p'
+
+                  CometChat.login(uid, authKey).then(
+                    user => {
+                      console.log("User logged in successfully", { user });
+                      setLoading(false)
+                      window.location.replace("/")
+                    },
+                    error => {
+                      setErr(true)
+                      console.log("Login ailed", { error });
+                    }
+                  )
+
                 })
                 .catch(error => {
                   console.error(error)
@@ -130,17 +148,26 @@ export default function LoginPassenger() {
                   helperText={props.touched.password && props.errors.password}
                   autoComplete="current-password"
                 />
-                {(err) ? (<Typography color={'red'}> Email or Password is not valid</Typography>
+                {(err) ? (
+
+                  <Typography color={'red'}> Email or Phone Exist!!</Typography>
+
                 ) : ('')}
 
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
+                <>
+                  {(isLoading) ? (
+                    <CircularProgress />
+                  ) : (
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                    >
+                      Sign In
+                    </Button>
+                  )}
+                </>
                 <Grid container>
 
                   <Grid item>
@@ -149,7 +176,7 @@ export default function LoginPassenger() {
                     </Link>
                   </Grid>
                   <Grid item style={{ marginBottom: '50px', marginTop: '20px' }}>
-                    <Link style={{textDecoration:'none',color:'#3FCEA8'}} to="/loginDriver">
+                    <Link style={{ textDecoration: 'none', color: '#3FCEA8' }} to="/loginDriver">
                       <Typography variant='button'>                      {"Are you a Driver?    Login"}
                       </Typography>
                     </Link>

@@ -38,6 +38,9 @@ import RideMap from "./components/common/RideMap";
 import Footer from "./components/common/Footer/Footer";
 import Landing2 from "./components/landing/Landing2";
 import Header from "./components/Header/Header";
+import { CometChat } from "@cometchat-pro/chat";
+
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -53,6 +56,21 @@ function App() {
 
   const lookingDriverMaxTime = 30000;
 
+  useEffect(() => {
+    const appID = process.env.REACT_APP_COMETCHAT_APP_ID;
+    const region = process.env.REACT_APP_COMETCHAT_REGION;
+    const appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion
+      (region).build();
+
+    CometChat.init(appID, appSetting).then(
+      () => {
+        console.log("Initialization completed sucessfully");
+      },
+      error => {
+        console.log("Initialization failed with error:", error);
+      }
+    )
+  },[])
   // const context = {
   //   user,
   //   setUser,
@@ -180,7 +198,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-        <Route exact path="/" component={Landing2} />
+          <Route exact path="/" component={Landing2} />
 
           {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/search" component={Search} />
@@ -223,7 +241,7 @@ function App() {
             <EditRide />
           </Route>
 
-          
+
           <Route exact path="/profilePasssenger">
             <ProfilePasssenger />
           </Route>
