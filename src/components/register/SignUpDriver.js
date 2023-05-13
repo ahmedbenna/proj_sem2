@@ -147,6 +147,7 @@ export default function SignUpDriver() {
         .then(response => {
           console.log(response);
           localStorage.setItem('idd', JSON.stringify(response.data.id ))
+          
           window.location.replace("/")
         })
 

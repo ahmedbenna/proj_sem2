@@ -14,14 +14,14 @@ export default function RideMap(props) {
         if (container != null) {
             container._leaflet_id = null;
         }
-        var map = L.map("map").setView([36.900791, 10.178942], 7);
+        var map = L.map("map").setView([36.900791, 10.178942], 8);
         L.tileLayer(
             "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
             {
                 attribution:
                     'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
-                id: "mapbox/streets-v11",
+                id: "mapbox/outdoors-v12",
                 tileSize: 512,
                 zoomOffset: -1,
                 accessToken:
@@ -31,8 +31,8 @@ export default function RideMap(props) {
 
 
         const carIcon = new L.Icon({
-            iconUrl: marker,
-            iconRetinaUrl: marker,
+            iconUrl: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png",
+            iconRetinaUrl: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png",
             iconSize: [60, 55],
             shadowSize: [50, 64],
             iconAnchor: [22, 94],
@@ -43,13 +43,23 @@ export default function RideMap(props) {
 
         if (props.pub) {
             L.Routing.control({
-                marker : marker,
+                // marker : carIcon,
+                icon: carIcon,
                 waypoints: [
                     L.latLng(props.pub.yd, props.pub.xd),
                     L.latLng(props.pub.ya, props.pub.xa)
                 ],
                 routeWhileDragging: true,
-                carIcon
+                lineOptions: {
+                    styles: [
+                        {
+                            color: "blue",
+                            opacity: "0.7",
+                            weight: 6,
+                        },
+                    ],
+                },
+                // carIcon
             }).addTo(map);
         }
 

@@ -25,8 +25,6 @@ import Context from "./context";
 import "./index.css";
 import Landing from "./components/landing/Landing";
 import LoginDriver from "./components/login/LoginDriver";
-import Header from "./components/common/Header";
-import Footer from "./components/common/Footer";
 import Search from "./components/home/Search";
 import SignUpDriver from "./components/register/SignUpDriver";
 import SignUpPassenger from "./components/register/SignUpPassenger";
@@ -37,6 +35,9 @@ import DriverProfile from "./components/common/driver/DriverProfile";
 import EditProfileDriver from "./components/common/driver/EditProfileDriver";
 import EditRide from "./components/common/driver/EditRide";
 import RideMap from "./components/common/RideMap";
+import Footer from "./components/common/Footer/Footer";
+import Landing2 from "./components/landing/Landing2";
+import Header from "./components/Header/Header";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -179,7 +180,9 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/" component={Landing} />
+        <Route exact path="/" component={Landing2} />
+
+          {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/search" component={Search} />
 
           <PrivateRoute exact path="/Home" component={Home} />

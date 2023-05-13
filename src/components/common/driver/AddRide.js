@@ -76,10 +76,18 @@ export default function AddRide() {
             center: [36.900791, 10.178942],
             zoom: 13,
             layers: [
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?lang=en", {
-                    attribution:
-                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                }),
+                L.tileLayer(
+                    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+                    {
+                        attribution:
+                            'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        maxZoom: 18,
+                        id: "mapbox/outdoors-v12",
+                        tileSize: 512,
+                        zoomOffset: -1,
+                        accessToken:
+                            "pk.eyJ1IjoiOWE3dDYiLCJhIjoiY2xiZWF1MWdlMDluOTNvcGF6Zmx3bng2ayJ9.8bB7_aVExETntLYL9F0fOA",
+                    }),
             ],
         });
     };
@@ -148,11 +156,11 @@ export default function AddRide() {
             const response = await axios.post('publication/conducteur/' + id
                 , {
                     lieuDepart: from.label,
-                    xd:from.x,
-                    yd:from.y,
+                    xd: from.x,
+                    yd: from.y,
                     lieuArrive: destination.label,
-                    xa:destination.x,
-                    ya:destination.y,
+                    xa: destination.x,
+                    ya: destination.y,
                     nbrePlace: seat,
                     prix: price,
                     dateDepart: date,
@@ -160,7 +168,7 @@ export default function AddRide() {
                 }
             );
             setIsLoading(false)
-            window.location='/driverProfile'
+            window.location = '/driverProfile'
 
             console.log(response);
         } catch (error) {
@@ -228,7 +236,7 @@ export default function AddRide() {
                                             </g>
                                         </svg>
                                     </div>
-                                    <p style={{color:'black'}} className="search__result-label">{result.label}</p>
+                                    <p style={{ color: 'black' }} className="search__result-label">{result.label}</p>
                                 </div>
                             ))}
                     </div>
