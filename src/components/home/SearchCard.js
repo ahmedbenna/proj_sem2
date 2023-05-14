@@ -175,7 +175,7 @@ export default function DrivererPublication(props) {
                                     },
                                 }}
                             >
-                                <Button variant="contained" color="primary" ><QuestionAnswerOutlinedIcon /> Chat with driver</Button>
+                                <Button variant="contained" color="primary" ><QuestionAnswerOutlinedIcon /> Chat</Button>
                             </Link>
                         </div>
                     </div>

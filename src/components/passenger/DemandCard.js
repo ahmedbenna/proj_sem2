@@ -10,7 +10,8 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import moment from 'moment';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
 import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
-// import RideMap from '../RideMap';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+
 //avatar____________________________
 import "../common/driver/assets/css/bootstrap.min.css"
 import "../common/driver/assets/css/fontawesome.css"
@@ -45,8 +46,8 @@ export default function DemandCard(props) {
     const idd = JSON.parse(localStorage.getItem('idd'))
 
     console.log(idd)
-    
-   
+
+
     function stringAvatar(name) {
         return {
             sx: {
@@ -55,7 +56,7 @@ export default function DemandCard(props) {
             children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
         };
     }
-  
+
     return (
         <Card sx={{ minWidth: 275, margin: '50px' }}>
             <div style={{ padding: '50px' }}>
@@ -110,14 +111,28 @@ export default function DemandCard(props) {
                         </div>
                         <div style={{ padding: '5px' }}>
 
-                            <Typography variant='body2' style={{ color: 'black' }}><EditNoteIcon/> Description: {props.pub.publication.description}</Typography>
+                            <Typography variant='body2' style={{ color: 'black' }}><EditNoteIcon /> Description: {props.pub.publication.description}</Typography>
                         </div>
-                        {/* <DemandRide pub={props.pub} /> */}
+                        <div style={{
+                            float: 'right',
+                            width: '25 %'
+                        }}>
+                            <Link
+                                to={{
+                                    pathname: "/chatWithDriver",
+                                    state: {
+                                        driver: props.pub.conducteur
+                                    },
+                                }}
+                            >
+                                <Button variant="contained" color="primary" ><QuestionAnswerOutlinedIcon /> Chat with driver</Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
 
             </div>
-        </Card>
+        </Card >
     )
 }

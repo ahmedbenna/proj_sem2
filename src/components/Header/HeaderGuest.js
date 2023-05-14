@@ -12,44 +12,23 @@ export default function HeaderGuest() {
         <div class="container d-flex align-items-center justify-content-between">
 
           <div class="logo">
-            <h1>
-              <Link to="/">
-                {/* <span> */}
-                  <img src={logo} height={300} />
+            <h1><Link to="/"  ><span>convoi</span></Link></h1>
 
-                {/* </span> */}
-              </Link></h1>
-            <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid" /></a>
           </div>
 
-          <nav id="navbar" class="navbar">
+          <nav id="navbar" className="navbar">
             <ul>
-              <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-              <li><a class="nav-link scrollto" href="#about">About</a></li>
-              <li><a class="nav-link scrollto" href="#features">Features</a></li>
-              <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
-              <li><a class="nav-link scrollto" href="#team">Team</a></li>
-              <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-              <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="#">Drop Down 1</a></li>
-                  <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                    <ul>
-                      <li><a href="#">Deep Drop Down 1</a></li>
-                      <li><a href="#">Deep Drop Down 2</a></li>
-                      <li><a href="#">Deep Drop Down 3</a></li>
-                      <li><a href="#">Deep Drop Down 4</a></li>
-                      <li><a href="#">Deep Drop Down 5</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Drop Down 2</a></li>
-                  <li><a href="#">Drop Down 3</a></li>
-                  <li><a href="#">Drop Down 4</a></li>
-                </ul>
-              </li>
-              <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+              <li><Link to="/" className="nav-link scrollto active" >Home</Link></li>
+              {/* <li><Link  to="/profilePasssenger" className="nav-link scrollto" ><AccountCircleIcon />  {passager.prenom} {passager.nom}</Link></li> */}
+              <li><a className="nav-link scrollto" href="#features">Features</a></li>
+              <li><a className="nav-link scrollto" href="#gallery">Gallery</a></li>
+              <li><a className="nav-link scrollto" href="#team">Team</a></li>
+              <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
+              <li> <Link to="/loginPaasenger" className="nav-link" >Login</Link></li>
+
+              {/* <li><Button className="nav-link scrollto" onClick={logout}><LogoutIcon /> LOGOUT </Button></li> */}
             </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
+            <i className="bi bi-list mobile-nav-toggle"></i>
           </nav>
 
         </div>

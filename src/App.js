@@ -40,13 +40,15 @@ import Landing2 from "./components/landing/Landing2";
 import Header from "./components/Header/Header";
 import { CometChat } from "@cometchat-pro/chat";
 import ChatWithDriver from "./components/chat/ChatWithDriver";
+import ChatForPassenger from "./components/chat/ChatForPassenger";
+import ChatForDriver from "./components/chat/ChatForDriver";
 
 
 
 function App() {
   const [user, setUser] = useState(null);
   // const [cometChat, setCometChat] = useState(null);
-  const [selectedFrom, setSelectedFrom] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedTo, setSelectedTo] = useState(null);
   const [rideRequest, setRideRequest] = useState(null);
   const [currentRide, setCurrentRide] = useState(null);
@@ -66,83 +68,92 @@ function App() {
     CometChat.init(appID, appSetting).then(
       () => {
         console.log("Initialization completed sucessfully");
+        setIsLoading(false)
       },
       error => {
+        setIsLoading(false)
         console.log("Initialization failed with error:", error);
       }
     )
-  },[])
-  
-  return (
-    // <Context.Provider value={context}>
-    <>
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Landing2} />
+  }, [])
+  if (!isLoading)
 
-          {/* <Route exact path="/" component={Landing} /> */}
-          <Route exact path="/search" component={Search} />
+    return (
+      // <Context.Provider value={context}>
+      <>
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Landing2} />
 
-          <PrivateRoute exact path="/Home" component={Home} />
+            {/* <Route exact path="/" component={Landing} /> */}
+            <Route exact path="/search" component={Search} />
 
-          <Route exact path="/chatWithDriver">
-            <ChatWithDriver />
-          </Route>
+            <PrivateRoute exact path="/Home" component={Home} />
 
-          <Route exact path="/loginPaasenger">
-            <LoginPassenger />
-          </Route>
-          <Route exact path="/loginDriver">
-            <LoginDriver />
-          </Route>
-          {/* <Route exact path="/passengerProfile ">
+            <Route exact path="/chatWithDriver">
+              <ChatWithDriver />
+            </Route>
+
+            <Route exact path="/loginPaasenger">
+              <LoginPassenger />
+            </Route>
+            <Route exact path="/chatForPassenger">
+              <ChatForPassenger />
+            </Route>
+            <Route exact path="/chatFroDriver">
+              <ChatForDriver />
+            </Route>
+            <Route exact path="/loginDriver">
+              <LoginDriver />
+            </Route>
+            {/* <Route exact path="/passengerProfile ">
             <PassengerProfile />
           </Route> */}
-          {/* <Route exact path="/driverProfile ">
+            {/* <Route exact path="/driverProfile ">
             <DriverProfile />
           </Route> */}
-          <Route exact path="/signUpDriver">
-            <SignUpDriver />
-          </Route>
-          <Route exact path="/signUpPassenger">
-            <SignUpPassenger />
-          </Route>
-          <Route exact path="/editPassengerProfile">
-            <EditPassengerProfile />
-          </Route>
-          <Route exact path="/editProfileDriver">
-            <EditProfileDriver />
-          </Route>
-          <Route exact path="/driverProfile">
-            <DriverProfile />
-          </Route>
-          <Route exact path="/addRide">
-            <AddRide />
-          </Route>
-          <Route exact path="/editRide">
-            <EditRide />
-          </Route>
+            <Route exact path="/signUpDriver">
+              <SignUpDriver />
+            </Route>
+            <Route exact path="/signUpPassenger">
+              <SignUpPassenger />
+            </Route>
+            <Route exact path="/editPassengerProfile">
+              <EditPassengerProfile />
+            </Route>
+            <Route exact path="/editProfileDriver">
+              <EditProfileDriver />
+            </Route>
+            <Route exact path="/driverProfile">
+              <DriverProfile />
+            </Route>
+            <Route exact path="/addRide">
+              <AddRide />
+            </Route>
+            <Route exact path="/editRide">
+              <EditRide />
+            </Route>
 
 
-          <Route exact path="/profilePasssenger">
-            <ProfilePasssenger />
-          </Route>
-          {/* <Route path='/profilePasssenger' element={<ProfilePasssenger />} /> */}
+            <Route exact path="/profilePasssenger">
+              <ProfilePasssenger />
+            </Route>
+            {/* <Route path='/profilePasssenger' element={<ProfilePasssenger />} /> */}
 
-          {/* <Route exact path="*">
+            {/* <Route exact path="*">
             <Redirect to="/" />
           </Route> */}
-        </Switch>
-        <Footer />
-        {/* <DriverProfile /> */}
-        {/* <RideMap/> */}
-      </Router>
-      <Loading />
-    </>
+          </Switch>
+          <Footer />
+          {/* <DriverProfile /> */}
+          {/* <RideMap/> */}
+        </Router>
+        <Loading />
+      </>
 
-    // </Context.Provider>
-  );
+      // </Context.Provider>
+    );
 }
 
 export default App;

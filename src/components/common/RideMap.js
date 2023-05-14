@@ -68,5 +68,5 @@ export default function RideMap(props) {
         // var marker = L.marker([51.5, -0.09]).addTo(map);
         // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
     }, [props.pub]);
-    return <div id="map" style={{ height: "300px", width: '100%' }}></div>;
+    return <div id="map" style={{ height: "500px", width: '100%' }}></div>;
 }

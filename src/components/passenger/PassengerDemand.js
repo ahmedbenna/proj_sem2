@@ -77,20 +77,7 @@ export default function PassengerDemand() {
         getDemande()
     }, [isLoading])
 
-    // const handleCancelRide = async (id)=>{
-    //     setError(false)
-    //     // setLoading(true)
-    //     try{
-    //         const response = await axios.delete('/demande/'+id)
-    //         console.log(response)
-    //         // setLoading(false)
-    //     }catch(error){
-    //         console.log(error)
-    //         setError(true)
-    //         // setLoading(false)
 
-    //     }
-    // }
     if (isLoading) {
 
         return <div className="App"><CircularProgress /></div>;

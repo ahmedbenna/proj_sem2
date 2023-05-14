@@ -33,8 +33,22 @@ export default function LoginDriver() {
     try {
       const response = await axios.post('conducteur/auth', formData);
       console.log(response);
-      localStorage.setItem('idd', JSON.stringify({ "id": response.data.id }))
-      window.location.replace("/")
+      localStorage.setItem('idd', JSON.stringify(response.data.id))
+      // window.location.replace("/")
+      const authKey = process.env.REACT_APP_COMETCHAT_AUTH_KEY;
+      const uid = String(response.data.id) + 'd'
+
+      CometChat.login(uid, authKey).then(
+        user => {
+          console.log("User logged in successfully", { user });
+          setLoading(false)
+          window.location.replace("/")
+        },
+        error => {
+          setErr(true)
+          console.log("Login failed", { error });
+        }
+      )
     } catch (error) {
       if (error.response.status == 400) {
         auth()
@@ -110,6 +124,7 @@ export default function LoginDriver() {
                 })
                 .catch(error => {
                   console.error(error)
+                  setLoading(false)
                   setErr(true)
                 }
 
@@ -152,7 +167,7 @@ export default function LoginDriver() {
 
                 {(err) ? (
 
-                  <Typography color={'red'}> Email or Phone Exist!!</Typography>
+                  <Typography color={'red'}> Wrong Email or Password </Typography>
 
                 ) : ('')}
 

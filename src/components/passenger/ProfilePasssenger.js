@@ -41,21 +41,21 @@ export default function ProfilePasssenger() {
         return <div ><CircularProgress /></div>
     }
     return (
-        <div style={{ paddingTop: '100px', backgroundImage: `url(${back})`, minHeight: '800px' }}>
+        <div style={{ padding: '20px', backgroundImage: `url(${back})`, minHeight: '800px' }}>
 
-            <div class="container emp-profile" >
+            <div class=" emp-profile" >
                 <form method="post">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="profile-img">
-                                <img src={Avatar} alt="" />
+                                <img src={Avatar} style={{height: '100px', width: '100px'}} alt="" />
                                 {/* <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file" />
                             </div> */}
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="profile-head">
                                 <h5>
                                     {passenger.prenom} {passenger.nom}
@@ -66,10 +66,10 @@ export default function ProfilePasssenger() {
 
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href='#home'  role="tab" aria-controls="home" aria-selected="false">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Contracts</a>
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab"  role="tab" href='#profile' aria-controls="profile" aria-selected="true">Demands</a>
                                     </li>
                                 </ul>
                             </div>

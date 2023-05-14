@@ -59,13 +59,13 @@ export default function DemandList() {
     const handleDelete = async (id) => {
         setLoading(true)
         try {
-            const response = await axios.delete('/demande/reject' + id)
-            console.log(response)
+            const response = await axios.put('/demande/rejeter/' + id)
+            console.log('rejectedddddddd',response)
             getDemande()
             setLoading(false)
         }
         catch (error) {
-            console.log(error)
+            console.error(error)
             setLoading(false)
         }
 
@@ -73,7 +73,7 @@ export default function DemandList() {
     const acceptDemand = async (id) => {
         setLoading(true)
         try {
-            const response = await axios.delete('/demande/accepter' + id)
+            const response = await axios.put('/demande/accepter/' + id)
             console.log(response)
             getDemande()
             setLoading(false)

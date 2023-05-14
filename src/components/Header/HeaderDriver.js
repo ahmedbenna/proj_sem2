@@ -1,47 +1,106 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import "./assets/css/style.css"
 
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { CircularProgress, Button } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { CometChat } from '@cometchat-pro/chat';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 export default function HeaderDriver() {
+
+  const [driver, setDriver] = useState();
+  const [isLoading, setIsloading] = useState(true);
+
+  const id = JSON.parse(localStorage.getItem('idd'))
+
+
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get('/conducteur/' + id.id);
+      console.log(response);
+      setDriver(response.data)
+      setIsloading(false)
+
+      console.log('ppppppp', response.data)
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await axios.get('/conducteur/' + id);
+        console.log(response);
+        setDriver(response.data)
+        setIsloading(false)
+
+        console.log('ppppppp', response.data)
+
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem('idd')
+      }
+    }
+    getUser()
+  }, [isLoading]);
+
+  const logout = () => {
+    // const isLogout = window.confirm("Do you want to log out ?");
+    // if (isLogout) {
+
+    removeAuthedInfo();
+    CometChat.logout().then(
+      () => {
+        console.log("Logout completed successfully");
+        window.location = '/'
+
+      },error=>{
+        console.log("Logout failed with exception:",{error});
+      }
+    );
+    // }
+  };
+
+  const removeAuthedInfo = () => {
+    // setUser(null);
+    localStorage.removeItem("idd");
+  };
+  console.log('pass', driver)
+  if (isLoading) {
+
+    return <div className="App"><CircularProgress /></div>;
+  }
+
   return (
     <div>
-      <header id="header" class="fixed-top d-flex align-items-center ">
-        <div class="container d-flex align-items-center justify-content-between">
+      <header id="header" className="fixed-top d-flex align-items-center">
+        <div className="container d-flex align-items-center justify-content-between">
 
-          <div class="logo">
-            <h1><a href="index.html"><span>Bootslander</span></a></h1>
-            <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"/></a>
+          <div className="logo">
+            <h1><Link to="/"  ><span>convoi</span></Link></h1>
+            {/* <a href="index.html"><img src="assets/img/logo.png" alt="" className="img-fluid" /></a> */}
           </div>
 
-          <nav id="navbar" class="navbar">
+          <nav id="navbar" className="navbar">
             <ul>
-              <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-              <li><a class="nav-link scrollto" href="#about">About</a></li>
-              <li><a class="nav-link scrollto" href="#features">Features</a></li>
-              <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
-              <li><a class="nav-link scrollto" href="#team">Team</a></li>
-              <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-              <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="#">Drop Down 1</a></li>
-                  <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                    <ul>
-                      <li><a href="#">Deep Drop Down 1</a></li>
-                      <li><a href="#">Deep Drop Down 2</a></li>
-                      <li><a href="#">Deep Drop Down 3</a></li>
-                      <li><a href="#">Deep Drop Down 4</a></li>
-                      <li><a href="#">Deep Drop Down 5</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Drop Down 2</a></li>
-                  <li><a href="#">Drop Down 3</a></li>
-                  <li><a href="#">Drop Down 4</a></li>
-                </ul>
-              </li>
-              <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+              <li><Link to="/"  className="nav-link scrollto active" >Home</Link></li>
+              <li><Link  to="/driverProfile" className="nav-link scrollto" ><AccountCircleIcon />  {driver.prenom} {driver.nom}</Link></li>
+              <li><a className="nav-link scrollto" href="#features">Features</a></li>
+              <li><a className="nav-link scrollto" href="#gallery">Gallery</a></li>
+              <li><a className="nav-link scrollto" href="#team">Team</a></li>
+              <li><Link to='/chatFroDriver' className="nav-link scrollto" > <QuestionAnswerOutlinedIcon/>  Chat</Link></li>
+              <li><Button  style={{color:'white',marginLeft:'20px'}} className="nav-link scrollto" onClick={logout}><LogoutIcon /> LOGOUT </Button></li>
             </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
+            <i className="bi bi-list mobile-nav-toggle"></i>
           </nav>
 
         </div>

@@ -5,6 +5,7 @@ import heroWave from './HeroWave';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'boxicons'
+import { Link } from 'react-router-dom';
 export default function Landing2() {
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export default function Landing2() {
                                 <h1>Build Your Landing Page With <span>Bootstlander</span></h1>
                                 <h2>We are team of talented designers making websites with Bootstrap</h2>
                                 <div className="text-center text-lg-start">
-                                    <a href="#about" className="btn-get-started scrollto">Get Started</a>
+                                    <Link to='/search' className="btn-get-started scrollto">Search</Link>
                                 </div>
                             </div>
                         </div>
