@@ -17,9 +17,11 @@ import "../common/driver/assets/css/fontawesome.css"
 import "../common/driver/assets/css/styles.css"
 // import Home from '../../home/Home';
 import { useState } from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import DemandRide from './DemandRide';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 function stringToColor(string) {
     let hash = 0;
     let i;
@@ -152,9 +154,30 @@ export default function DrivererPublication(props) {
                         </div>
                         <div style={{ padding: '5px' }}>
 
-                            <Typography variant='body2' style={{ color: 'black' }}><EditNoteIcon/> Description: {props.pub.description}</Typography>
+                            <Typography variant='body2' style={{ color: 'black' }}><EditNoteIcon /> Description: {props.pub.description}</Typography>
                         </div>
-                        <DemandRide pub={props.pub} />
+                        <div style={{
+                            float: 'left',
+                            width: '25 %'
+                        }}>
+
+                            <DemandRide pub={props.pub} />
+                        </div>
+                        <div style={{
+                            float: 'right',
+                            width: '25 %'
+                        }}>
+                            <Link
+                                to={{
+                                    pathname: "/chatWithDriver",
+                                    state: {
+                                        driver: props.pub.conducteur
+                                    },
+                                }}
+                            >
+                                <Button variant="contained" color="primary" ><QuestionAnswerOutlinedIcon /> Chat with driver</Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 

@@ -6,13 +6,16 @@ import HeaderPassenger from './HeaderPassenger';
 
 function Header() {
     return (
-        localStorage.getItem('idp') ?
-            <HeaderPassenger />
-            : localStorage.getItem('idd') ?
-                <HeaderDriver />
-                : <HeaderGuest />
+        <div style={{ paddingBottom: '80px' }}>
+            {localStorage.getItem('idp') ?
+                <HeaderPassenger />
+                : localStorage.getItem('idd') ?
+                    <HeaderDriver />
+                    : <HeaderGuest />
+            }
+        </div>
     )
-    
+
 };
 export default Header;
 
