@@ -60,7 +60,7 @@ export default function DemandList() {
         setLoading(true)
         try {
             const response = await axios.put('/demande/rejeter/' + id)
-            console.log('rejectedddddddd',response)
+            console.log('rejectedddddddd', response)
             getDemande()
             setLoading(false)
         }
@@ -89,9 +89,12 @@ export default function DemandList() {
     }
     return (
         <div>
+            {(selectedPub)?(
             <div>
                 <RideMap pub={selectedPub} />
             </div>
+            ):('')}
+
             {
                 (pending != []) ? (
                     <>
@@ -201,10 +204,10 @@ export default function DemandList() {
                                             <div class="border-bottom-primary thin">
                                                 <div class="status-container">
                                                     <div class="date float-left">
-                                                        {moment(pub.dateDepart).calendar()}
+                                                        {moment(pub.publication.dateDepart).calendar()}
                                                     </div>
                                                     <div class="status-none float-right text-uppercase">
-                                                        {pub.prix}DT
+                                                        {pub.publication.prix}DT
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>
@@ -216,14 +219,14 @@ export default function DemandList() {
                                                         <span class="fas fa-location-arrow location-icon-rotate  map-input-icon"></span>
                                                         <div class="map-input display-flex" style={{ height: '100px' }}>
                                                             <input class="controls flex-1 font-weight-light" type="text"
-                                                                placeholder="Enter an origin location" value={pub.lieuDepart} disabled />
+                                                                placeholder="Enter an origin location" value={pub.publication.lieuDepart} disabled />
                                                         </div>
                                                     </div>
                                                     <div class="href-decoration-none">
                                                         <div class="w-100 map-input-container map-input-container-bottom">
                                                             <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
                                                             <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
-                                                                {pub.lieuArrive}
+                                                                {pub.publication.lieuArrive}
                                                             </div>
                                                             <span class="dotted-line"></span>
                                                         </div>
@@ -234,11 +237,11 @@ export default function DemandList() {
                                                 <Typography variant='h6'> <PersonIcon /> Client: {pub.passager.prenom} {pub.passager.nom}</Typography>
                                                 <Typography variant='h6'> <EmailIcon /> Email: {pub.passager.email}</Typography>                                            </div>
                                             <div style={{ padding: '5px' }}>
-                                                <Typography variant='body2' style={{ color: 'black' }} > <AirlineSeatReclineNormalIcon /> Available Seats: {pub.nbrePlace}</Typography>
+                                                <Typography variant='body2' style={{ color: 'black' }} > <AirlineSeatReclineNormalIcon /> Available Seats: {pub.publication.nbrePlace}</Typography>
                                                 <Divider />
                                             </div>
                                             <div>
-                                                <div>
+                                                {/* <div>
                                                     <div style={{
                                                         float: 'right',
                                                         background: 'blue',
@@ -252,7 +255,7 @@ export default function DemandList() {
                                                         <Button onClick={handleDelete} variant='contained' style={{ backgroundColor: 'red' }} > delete</Button>
 
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div style={{ padding: '20px' }}>
                                                     <Button href='#' onClick={() => setSelectedPub(pub)} style={{ color: 'white' }} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
 
@@ -290,10 +293,10 @@ export default function DemandList() {
                                             <div class="border-bottom-primary thin">
                                                 <div class="status-container">
                                                     <div class="date float-left">
-                                                        {moment(pub.dateDepart).calendar()}
+                                                        {moment(pub.publication.dateDepart).calendar()}
                                                     </div>
                                                     <div class="status-none float-right text-uppercase">
-                                                        {pub.prix}DT
+                                                        {pub.publication.prix}DT
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>
@@ -305,14 +308,14 @@ export default function DemandList() {
                                                         <span class="fas fa-location-arrow location-icon-rotate  map-input-icon"></span>
                                                         <div class="map-input display-flex" style={{ height: '100px' }}>
                                                             <input class="controls flex-1 font-weight-light" type="text"
-                                                                placeholder="Enter an origin location" value={pub.lieuDepart} disabled />
+                                                                placeholder="Enter an origin location" value={pub.publication.lieuDepart} disabled />
                                                         </div>
                                                     </div>
                                                     <div class="href-decoration-none">
                                                         <div class="w-100 map-input-container map-input-container-bottom">
                                                             <span class="map-input-icon"><img src="../icons/circle.svg" alt="Current Location Icon" /></span>
                                                             <div style={{ height: '100px' }} class="map-input display-flex controls flex-1 align-items-center">
-                                                                {pub.lieuArrive}
+                                                                {pub.publication.lieuArrive}
                                                             </div>
                                                             <span class="dotted-line"></span>
                                                         </div>
@@ -324,11 +327,11 @@ export default function DemandList() {
                                                 <Typography variant='h6'> <EmailIcon /> Email: {pub.passager.email}</Typography>
                                             </div>
                                             <div style={{ padding: '5px' }}>
-                                                <Typography variant='body2' style={{ color: 'black' }} > <AirlineSeatReclineNormalIcon /> Available Seats: {pub.nbrePlace}</Typography>
+                                                <Typography variant='body2' style={{ color: 'black' }} > <AirlineSeatReclineNormalIcon /> Available Seats: {pub.publication.nbrePlace}</Typography>
                                                 <Divider />
                                             </div>
                                             <div>
-                                                <div>
+                                                {/* <div>
                                                     <div style={{
                                                         float: 'right',
                                                         background: 'blue',
@@ -342,7 +345,7 @@ export default function DemandList() {
                                                         <Button onClick={handleDelete} variant='contained' style={{ backgroundColor: 'red' }} > delete</Button>
 
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div style={{ padding: '20px' }}>
                                                     <Button href='#' onClick={() => setSelectedPub(pub)} style={{ color: 'white' }} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
 

@@ -20,10 +20,10 @@ export default function Landing2() {
                     <div className="row justify-content-between">
                         <div className="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
                             <div data-aos="zoom-out">
-                                <h1>Build Your Landing Page With <span>Bootstlander</span></h1>
-                                <h2>We are team of talented designers making websites with Bootstrap</h2>
+                                <h1>Travel at lower prices <span>Erba7 Wa9tek</span></h1>
+                                {/* <h2>We are team of talented designers making websites with Bootstrap</h2> */}
                                 <div className="text-center text-lg-start">
-                                    <Link to='/search' className="btn-get-started scrollto">Search</Link>
+                                    <Link to='/search' className="btn-get-started scrollto">Find a Ride</Link>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@ export default function Landing2() {
                             <img src="landing/assets/img/hero-img.png" className="img-fluid animated" alt="" />
                         </div>
                     </div>
-                    {/* <img src={heroWave} alt="" /> */}
+                    <img src={heroWave} alt="" />
                     <heroWave/>
                 </div>
 

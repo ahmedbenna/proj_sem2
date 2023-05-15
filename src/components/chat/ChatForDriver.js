@@ -10,7 +10,7 @@ export default function ChatForDriver() {
         const authKey = process.env.REACT_APP_COMETCHAT_AUTH_KEY;
         const uid = String(JSON.parse(localStorage.getItem('idd'))) + 'd'
 
-        CometChat.login('11d', authKey).then(
+        CometChat.login(uid, authKey).then(
             user => {
                 console.log("User logged in successfully", { user });
                 setLoading(false)
