@@ -41,9 +41,9 @@ export default function ProfilePasssenger() {
         return <div ><CircularProgress /></div>
     }
     return (
-        <div style={{ padding: '20px', backgroundImage: `url(${back})`, minHeight: '800px' }}>
+        <div style={{ padding: '20px', backgroundColor: '#DFF4FF', minHeight: '800px' }}>
 
-            <div class=" emp-profile" >
+            <div class=" container emp-profile" >
                 <form method="post">
                     <div class="row">
                         <div class="col-md-2">

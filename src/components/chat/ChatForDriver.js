@@ -24,7 +24,7 @@ export default function ChatForDriver() {
     }, [isLoading])
     if (!isLoading)
         return (
-            <div id="row" style={{ height: "100vh", width: "100vw", display: "flex", overflow: "hidden" }}>
+            <div id="row" style={{ height: "90vh", width: "100vw", display: "flex", overflow: "hidden" }}>
                 <CometChatUI />
             </div >
         )

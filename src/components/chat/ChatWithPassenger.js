@@ -16,7 +16,7 @@ const ChatWithPassneger = (props) => {
   
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ width: "90vw", height: "100vh" }}>
       <CometChatMessages chatWithUser={String(props.id)+'p'} />
     </div>
   );

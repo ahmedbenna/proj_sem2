@@ -36,7 +36,7 @@ const ChatWithDriver = () => {
   if (!isLoading)
 
     return (
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div style={{ width: "90vw", height: "100vh" }}>
         <CometChatMessages chatWithUser={String(driver.id) + 'd'} />
       </div>
     );

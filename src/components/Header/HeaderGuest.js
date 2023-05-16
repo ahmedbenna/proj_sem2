@@ -12,7 +12,7 @@ export default function HeaderGuest() {
         <div class="container d-flex align-items-center justify-content-between">
 
           <div class="logo">
-            <h1><Link to="/"  ><span>Erba7 Wa9tek</span></Link></h1>
+            <h1><Link to="/"  ><span>irBaH WaQteK</span></Link></h1>
 
           </div>
 

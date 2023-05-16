@@ -44,7 +44,7 @@ export default function RideMap(props) {
         if (props.pub) {
             L.Routing.control({
                 // marker : carIcon,
-                icon: carIcon,
+                // icon: carIcon,
                 waypoints: [
                     L.latLng(props.pub.yd, props.pub.xd),
                     L.latLng(props.pub.ya, props.pub.xa)

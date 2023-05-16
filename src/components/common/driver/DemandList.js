@@ -167,10 +167,10 @@ export default function DemandList() {
 
                                                     </div>
                                                 </div>
-                                                <div style={{ padding: '20px' }}>
+                                                {/* <div style={{ padding: '20px' }}>
                                                     <Button href='#' onClick={() => setSelectedPub(pub.publication)} style={{ color: 'white' }} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
 
-                                                </div>
+                                                </div> */}
 
                                             </div>
                                         </div>
@@ -256,10 +256,10 @@ export default function DemandList() {
 
                                                     </div>
                                                 </div> */}
-                                                <div style={{ padding: '20px' }}>
+                                                {/* <div style={{ padding: '20px' }}>
                                                     <Button href='#' onClick={() => setSelectedPub(pub)} style={{ color: 'white' }} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
 
-                                                </div>
+                                                </div> */}
 
                                             </div>
                                         </div>
@@ -346,10 +346,10 @@ export default function DemandList() {
 
                                                     </div>
                                                 </div> */}
-                                                <div style={{ padding: '20px' }}>
+                                                {/* <div style={{ padding: '20px' }}>
                                                     <Button href='#' onClick={() => setSelectedPub(pub)} style={{ color: 'white' }} class="btn btn-primary w-100 box-shadow-0 font-weight-light text-uppercase">Show in Map</Button>
 
-                                                </div>
+                                                </div> */}
 
                                             </div>
                                         </div>

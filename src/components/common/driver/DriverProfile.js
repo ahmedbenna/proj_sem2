@@ -40,7 +40,10 @@ export default function DriverProfile() {
         return <div ><CircularProgress /></div>
     }
     return (
-        <div style={{ paddingTop: '100px', backgroundImage: `url(${back})`, minHeight: '800px' }}>
+        <div style={{ paddingTop: '100px', 
+        // backgroundImage: `url(${back})`,
+        backgroundColor:'#DFF4FF',
+         minHeight: '800px' }}>
             <div style={{}} class="container emp-profile" >
                 <form method="post">
                     <div class="row">
@@ -136,7 +139,7 @@ export default function DriverProfile() {
                                         </div>
                                     </div>
                                     <Link to='/editProfileDriver'>
-                                        <Button variant='outlined' style={{color:'gray'}} >Edit Profile </Button>
+                                        <Button variant='contained' style={{color:'#ffffff',backgroundColor:'#2EE7A6'}} >Edit Profile </Button>
                                     </Link>
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

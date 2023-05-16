@@ -6,6 +6,7 @@ import axios from 'axios';
 import './search.css';
 import { useLocation } from 'react-router-dom';
 import resultimg from './result.svg'
+import { Button } from '@mui/material';
 
 export default function Search() {
 
@@ -17,7 +18,7 @@ export default function Search() {
   const [result, setResult] = useState(null)
   const [from, setFrom] = useState(null)
   const [destination, setDestination] = useState(null)
-
+const [ser, setSer] = useState(false)
 
   const fromRef = useRef(location.from);
   const destinationRef = useRef(location.destination);
@@ -33,17 +34,17 @@ export default function Search() {
 
 
   const search = async () => {
+    setSer(true)
     const { from, destination } = getInputs();
     try {
       const response = await axios.get('publication/recherche/'
-      , {
-        params: {
-          lieuD: from,
-          lieuA: destination,
-      //     // LieuD: 'Tunis,',
-      //     // LieuA: '',
-        },
-      }
+        , {
+          params: {
+            lieuD: from,
+            lieuA: destination,
+      
+          },
+        }
       )
       console.log(response)
       setResult(response.data)
@@ -57,15 +58,16 @@ export default function Search() {
 
   }, [])
   return (
-    <div  style={{backgroundImage: `url(${resultimg})`}}
-    // style={{ backgroundImage: `url(${background})` }}
-    >
-      <div className="s0133">
+
+    <div style={{ backgroundColor: '#DFF4FF' }}>
+
+
+      <div className="s0133" >
         <form>
           {/* <fieldset>
             <legend>QUICK FIND YOUR TRIP</legend>
           </fieldset> */}
-          <div className="inner-form" style={{ marginTop:'50px' , padding: '10px', backgroundColor: '#232223' }}>
+          <div className="inner-form" style={{ marginTop: '50px', padding: '10px' }}>
             <div className="left">
               <div className="input-wrap first">
                 <div className="input-field first">
@@ -80,7 +82,7 @@ export default function Search() {
                 </div>
               </div>
             </div>
-            <button onClick={search} className="btn-search" type="button">SEARCH</button>
+            <Button onClick={search} className="btn-search" >SEARCH</Button>
           </div>
         </form>
 
@@ -94,11 +96,11 @@ export default function Search() {
                   result.map(pub =>
                     <SearchCard pub={pub} />
                   )
-                ) : (
+                ) : (!result && ser) ? (
                   <h3>
                     NO Result
                   </h3>
-                )}
+                ) : ('')}
 
               </div>
             </div>

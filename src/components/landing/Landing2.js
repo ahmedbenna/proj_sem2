@@ -5,7 +5,9 @@ import heroWave from './HeroWave';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'boxicons'
+import carpoolsvg from './assets/img/Carpool-rafiki.svg'
 import { Link } from 'react-router-dom';
+import RidsList from './RidsList';
 export default function Landing2() {
 
     useEffect(() => {
@@ -20,7 +22,7 @@ export default function Landing2() {
                     <div className="row justify-content-between">
                         <div className="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
                             <div data-aos="zoom-out">
-                                <h1>Travel at lower prices <span>Erba7 Wa9tek</span></h1>
+                                <h1>Travel at lower prices <span>irBaH WaQteK</span></h1>
                                 {/* <h2>We are team of talented designers making websites with Bootstrap</h2> */}
                                 <div className="text-center text-lg-start">
                                     <Link to='/search' className="btn-get-started scrollto">Find a Ride</Link>
@@ -28,11 +30,11 @@ export default function Landing2() {
                             </div>
                         </div>
                         <div className="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                            <img src="landing/assets/img/hero-img.png" className="img-fluid animated" alt="" />
+                            <img src='landing/assets/img/Carpool-amico.svg' className="img-fluid animated" alt="" />
                         </div>
                     </div>
                     <img src={heroWave} alt="" />
-                    <heroWave/>
+                    <heroWave />
                 </div>
 
             </section>
@@ -45,12 +47,12 @@ export default function Landing2() {
 
                         <div className="row">
                             <div className="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="fade-right">
-                                {/* <a href="https://www.youtube.com/watch?v=StpBR2W8G5A" className="glightbox play-btn mb-4"></a> */}
+                                <img src = 'landing/assets/img/Carpool-rafiki.svg' />
                             </div>
 
                             <div className="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
-                                <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-                                <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam sint et id nulla tenetur. Suscipit aut voluptate.</p>
+                                <h3>Our Services</h3>
+                                <p>A wide choice of trips at low prices irBaH WaQteK Your best decision!</p>
 
                                 <div className="icon-box" data-aos="zoom-in" data-aos-delay="100">
                                     <div className="icon"><i className="bx bx-fingerprint"></i></div>
@@ -79,7 +81,7 @@ export default function Landing2() {
 
                     </div>
                 </section>
-                <section id="features" className="features">
+                {/* <section id="features" className="features">
                     <div className="container">
 
                         <div className="section-title" data-aos="fade-up">
@@ -165,8 +167,8 @@ export default function Landing2() {
 
 
                     </div>
-                </section>
-                <section id="counts" className="counts">
+                </section> */}
+                {/* <section id="counts" className="counts">
                     <div className="container">
 
                         <div className="row" data-aos="fade-up">
@@ -206,8 +208,8 @@ export default function Landing2() {
                         </div>
 
                     </div>
-                </section>
-                <section id="details" className="details">
+                </section> */}
+                {/* <section id="details" className="details">
                     <div className="container">
 
                         <div className="row content">
@@ -376,8 +378,8 @@ export default function Landing2() {
                         </div>
 
                     </div>
-                </section>
-                <section id="testimonials" className="testimonials">
+                </section> */}
+                {/* <section id="testimonials" className="testimonials">
                     <div className="container">
 
                         <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -453,33 +455,19 @@ export default function Landing2() {
                         </div>
 
                     </div>
-                </section>
+                </section> */}
 
                 <section id="team" className="team">
                     <div className="container">
 
                         <div className="section-title" data-aos="fade-up">
-                            <h2>Team</h2>
-                            <p>Our Great Team</p>
+                            <h2>Rides</h2>
+                            <p>Recent Rides</p>
                         </div>
 
                         <div className="row" data-aos="fade-left">
 
-                            <div className="col-lg-3 col-md-6">
-                                <div className="member" data-aos="zoom-in" data-aos-delay="100">
-                                    <div className="pic"><img src="landing/assets/img/team/team-1.jpg" className="img-fluid" alt="" /></div>
-                                    <div className="member-info">
-                                        <h4>Walter White</h4>
-                                        <span>Chief Executive Officer</span>
-                                        <div className="social">
-                                            <a href=""><i className="bi bi-twitter"></i></a>
-                                            <a href=""><i className="bi bi-facebook"></i></a>
-                                            <a href=""><i className="bi bi-instagram"></i></a>
-                                            <a href=""><i className="bi bi-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <RidsList/>
 
                             <div className="col-lg-3 col-md-6 mt-5 mt-md-0">
                                 <div className="member" data-aos="zoom-in" data-aos-delay="200">
@@ -533,7 +521,7 @@ export default function Landing2() {
 
                     </div>
                 </section>
-                <section id="pricing" className="pricing">
+                {/* <section id="pricing" className="pricing">
                     <div className="container">
 
                         <div className="section-title" data-aos="fade-up">
@@ -615,8 +603,8 @@ export default function Landing2() {
                         </div>
 
                     </div>
-                </section>
-                <section id="faq" className="faq section-bg">
+                </section> */}
+                {/* <section id="faq" className="faq section-bg">
                     <div className="container">
 
                         <div className="section-title" data-aos="fade-up">
@@ -675,8 +663,8 @@ export default function Landing2() {
                         </div>
 
                     </div>
-                </section>
-                <section id="contact" className="contact">
+                </section> */}
+                {/* <section id="contact" className="contact">
                     <div className="container">
 
                         <div className="section-title" data-aos="fade-up">
@@ -686,7 +674,7 @@ export default function Landing2() {
 
                         <div className="row">
 
-                            {/* <div className="col-lg-4" data-aos="fade-right" data-aos-delay="100">
+                            <div className="col-lg-4" data-aos="fade-right" data-aos-delay="100">
                                 <div className="info">
                                     <div className="address">
                                         <i className="bi bi-geo-alt"></i>
@@ -708,11 +696,11 @@ export default function Landing2() {
 
                                 </div>
 
-                            </div> */}
+                            </div>
 
                             <div className="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="200">
 
-                                {/* <form action="forms/contact.php" method="post" role="form" className="php-email-form">
+                                <form action="forms/contact.php" method="post" role="form" className="php-email-form">
                                     <div className="row">
                                         <div className="col-md-6 form-group">
                                             <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
@@ -733,14 +721,14 @@ export default function Landing2() {
                                 <div className="sent-message">Your message has been sent. Thank you!</div>
                             </div>
                             <div className="text-center"><button type="submit">Send Message</button></div>
-                        </form> */}
+                        </form>
 
                             </div>
 
                         </div>
 
                     </div>
-                </section >
+                </section > */}
 
             </main >
 

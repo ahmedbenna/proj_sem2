@@ -141,9 +141,9 @@ function App() {
             </Route>
             {/* <Route path='/profilePasssenger' element={<ProfilePasssenger />} /> */}
 
-            {/* <Route exact path="*">
+            <Route exact path="*">
             <Redirect to="/" />
-          </Route> */}
+          </Route>
           </Switch>
           <Footer />
           {/* <DriverProfile /> */}
